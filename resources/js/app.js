@@ -20,6 +20,8 @@ const toast = swal.mixin({
 
 window.toast = toast;
 
+require('./services/subscriber');
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -38,6 +40,10 @@ Vue.component('app', App);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+console.log('store');
+
+store.dispatch('auth/attempt', localStorage.getItem('access_token'));
 
 const app = new Vue({
     el: '#app',

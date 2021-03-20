@@ -7,7 +7,6 @@ store.subscribe(mutation => {
             if (mutation.payload) {
                 localStorage.setItem('access_token', mutation.payload);
             } else {
-                axios.defaults.headers.common['Authorization'] = null;
                 localStorage.removeItem('access_token');
             }
             break;

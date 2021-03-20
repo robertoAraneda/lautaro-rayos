@@ -2,13 +2,19 @@
     <v-app>
         <!--  <v-navigation-drawer app> </v-navigation-drawer>
  -->
-        <v-app-bar absolute color="white" app>
+        <v-app-bar v-if="!authenticated" absolute color="white" app>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
             <v-toolbar-title>Title</v-toolbar-title>
 
             <v-spacer></v-spacer>
             <v-btn @click="test">Login</v-btn>
+        </v-app-bar>
+        <v-app-bar v-else absolute color="white" app>
+            <v-app-bar-nav-icon></v-app-bar-nav-icon>
+            <v-toolbar-title>Hospital Dr. Abraham Godoy Peña</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn @click="test" class="ml-3">Cerrar sesión</v-btn>
         </v-app-bar>
 
         <!-- Sizes your content based upon application components -->
@@ -27,6 +33,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
     props: {
         privileges: Object,
@@ -36,6 +43,12 @@ export default {
         return {};
     },
     mounted() {},
+    computed: {
+        ...mapGetters({
+            authenticated: 'auth/authenticated',
+            user: 'auth/user',
+        }),
+    },
 
     methods: {
         test() {

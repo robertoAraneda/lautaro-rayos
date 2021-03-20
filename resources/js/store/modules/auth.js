@@ -1,4 +1,3 @@
-import myHeaders from '../../services/fetch';
 const BASE_URL = '/api/auth';
 
 export default {
@@ -10,7 +9,7 @@ export default {
     mutations: {
         SET_LOGIN_USER: (state, user) => {
             if (user !== null) {
-                state.loginUser = Object.assign({}, user.properties);
+                state.loginUser = Object.assign({}, user);
             } else {
                 state.loginUser = user;
             }
@@ -23,10 +22,6 @@ export default {
         authenticated: state => state.loginUser && state.access_token,
         token: state => state.access_token,
         user: state => state.loginUser,
-        isAdmin: state =>
-            state.loginUser
-                ? state.loginUser.role.description === 'Administrador'
-                : false,
     },
     actions: {
         login: async (_, credentials) => {
@@ -39,7 +34,7 @@ export default {
 
                 var requestOptions = {
                     method: 'POST',
-                    headers: myHeaders,
+                    headers: { 'Content-Type': 'application/json' },
                     body: raw,
                 };
 
@@ -68,8 +63,15 @@ export default {
             try {
                 var requestOptions = {
                     method: 'GET',
-                    headers: myHeaders,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${localStorage.getItem(
+                            'access_token'
+                        )}`,
+                    },
                 };
+
+                console.log('options', requestOptions);
                 const response = await fetch(
                     `${BASE_URL}/user`,
                     requestOptions
@@ -78,9 +80,11 @@ export default {
 
                 commit('SET_LOGIN_USER', user);
 
+                console.log(user);
+
                 return { success: true };
             } catch (error) {
-                console.log(error.response);
+                console.log(error);
 
                 commit('SET_ACCESS_TOKEN', null);
                 commit('SET_LOGIN_USER', null);
