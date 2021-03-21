@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\MakeResponse;
+use App\Helpers\Response;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Repositories\UserRepository;
+use App\Http\Resources\Object\UserObject;
 
 class AuthController extends Controller
 {
@@ -15,13 +17,15 @@ class AuthController extends Controller
   /**
    * Property for make a response.
    *
-   * @var  App\Helpers\MakeResponse  $response
+   * @var  App\Helpers\Response  $response
    */
     protected $response;
+    protected $userRepository;
 
-    public function __construct(MakeResponse $makeResponse = null)
+    public function __construct(Response $response, UserRepository $userRepository)
     {
-        $this->response = $makeResponse;
+        $this->response         = $response;
+        $this->userRepository   = $userRepository;
     }
 
     /**
@@ -32,14 +36,13 @@ class AuthController extends Controller
     protected function validateData($request)
     {
         return Validator::make($request, [
-      'rut' => 'required|max:12|string',
-      'name' => 'required|max:200|string',
-      'mobile' => 'required|max:12|string',
-      'email' => 'required|max:255|email|unique:users',
-      'role_id' => 'required|numeric',
-      'password' => 'required|string',
-      'isFirstLogin' => 'required|numeric'
-    ]);
+            'rut'               => 'required|max:12|string',
+            'name'              => 'required|max:200|string',
+            'phone'             => 'required|max:12|string',
+            'email'             => 'required|max:255|email|unique:users',
+            'lastname'          => 'required',
+            'mother_lastname'   => 'required'
+        ]);
     }
 
     /**
@@ -64,23 +67,11 @@ class AuthController extends Controller
                 return $this->response->customMessageResponse(($validate->errors()), 406);
             }
 
-            $user = new User([
-        'rut' => $request->rut,
-        'name' => $request->name,
-        'phone' => $request->phone,
-        'mobile' => $request->mobile,
-        'email' => $request->email,
-        'password' => bcrypt($request->password),
-        'is_first_login' => $request->isFirstLogin,
-        'role_id' => $request->role_id,
-        'user_create_id' => auth()->id()
-      ]);
+            $user = $this->userRepository->store($request);
 
-            $user->save();
-
-            return $this->response->created($user->fresh()->format());
+            return $this->response->created(new UserObject($user));
         } catch (\Exception $ex) {
-            return $this->response->exception($ex->getMessage());
+            return $this->response->internalServerError($ex);
         }
     }
 
@@ -97,16 +88,16 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-      'rut' => 'required|string',
-      'password' => 'required|string',
-      'remember_me' => 'boolean'
-    ]);
+            'rut' => 'required|string',
+            'password' => 'required|string',
+            'remember_me' => 'boolean'
+        ]);
         $credentials = request(['rut', 'password']);
 
         if (!Auth::attempt($credentials)) {
             return response()->json([
-        'message' => 'Unauthorized'
-      ], 401);
+                'message' => 'Unauthorized'
+            ], 401);
         }
 
         $user = $request->user();
@@ -122,12 +113,12 @@ class AuthController extends Controller
         $token->save();
 
         return response()->json([
-      'access_token' => $tokenResult->accessToken,
-      'token_type' => 'Bearer',
-      'expires_at' => Carbon::parse(
-          $tokenResult->token->expires_at
-      )->toDateTimeString()
-    ]);
+            'access_token' => $tokenResult->accessToken,
+            'token_type' => 'Bearer',
+            'expires_at' => Carbon::parse(
+                $tokenResult->token->expires_at
+            )->toDateTimeString()
+        ]);
     }
 
     /**

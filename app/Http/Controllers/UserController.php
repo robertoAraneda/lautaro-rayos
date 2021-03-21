@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Response;
 use App\Http\Repositories\UserRepository;
 use App\Http\Resources\Collection\UserCollection;
+use App\Http\Resources\Object\UserObject;
 
 class UserController extends Controller
 {
@@ -39,29 +40,6 @@ class UserController extends Controller
             return $this->response->internalServerError($exception);
         }
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -71,7 +49,34 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            if (!request()->isJson()) {
+                return $this->response->unauthorized();
+            }
+
+            if (!is_numeric($id)) {
+                return $this->response->badRequest();
+            }
+
+            $userModel = $this->userRepository->findById($id);
+            if (!isset($userModel)) {
+                return $this->response->noContent();
+            }
+
+            $checkEmailUser = $this->userRepository->findByEmail($request->email);
+
+            if ($checkEmailUser) {
+                if ($userModel->id != $checkEmailUser->id) {
+                    return $this->response->customMessageResponse('Email ya existe', 406);
+                }
+            }
+
+            $user = $this->userRepository->update($userModel, $request);
+
+            return $this->response->ok(new UserObject($user));
+        } catch (\Exception $exception) {
+            return $this->response->internalServerError($exception);
+        }
     }
 
     /**
@@ -82,6 +87,26 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            if (!request()->isJson()) {
+                return $this->response->unauthorized();
+            }
+
+            if (!is_numeric($id)) {
+                return $this->response->badRequest();
+            }
+
+            $userModel = $this->userRepository->findById($id);
+
+            if (!isset($userModel)) {
+                return $this->response->noContent();
+            }
+
+            $userModel->delete();
+
+            return $this->response->ok(null);
+        } catch (\Exception $exception) {
+            return $this->response->internalServerError($exception);
+        }
     }
 }

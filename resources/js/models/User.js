@@ -12,9 +12,9 @@ export default class User {
         this.id = id;
         this.rut = rut;
         this.name = name;
-        lastname = lastname;
-        phone = phone;
-        motherLastname = motherLastname;
+        this.lastname = lastname;
+        this.phone = phone;
+        this.motherLastname = motherLastname;
         this.email = email;
         this.password = password;
     }

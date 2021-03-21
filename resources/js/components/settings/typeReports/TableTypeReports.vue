@@ -1,6 +1,6 @@
 <template>
-    <v-card v-if="users">
-        <v-data-table :headers="headers" :items="users" :search="search">
+    <v-card v-if="typeReports">
+        <v-data-table :headers="headers" :items="typeReports" :search="search">
             <template v-slot:progress>
                 <v-progress-linear
                     color="blueS"
@@ -36,7 +36,7 @@
                                 <v-icon>mdi-plus</v-icon>
                             </v-btn>
                         </template>
-                        <span>Crear funcionario</span>
+                        <span>Crear registro nuevo</span>
                     </v-tooltip>
                 </v-toolbar>
             </template>
@@ -49,7 +49,7 @@
                             </v-icon>
                         </v-btn>
                     </template>
-                    <span>Editar</span>
+                    <span>Editar registro</span>
                 </v-tooltip>
                 <v-tooltip color="verde darken-1" bottom>
                     <template v-slot:activator="{ on }">
@@ -59,7 +59,7 @@
                             </v-icon>
                         </v-btn>
                     </template>
-                    <span>Eliminar</span>
+                    <span>Eliminar registro</span>
                 </v-tooltip>
             </template>
         </v-data-table>
@@ -77,28 +77,12 @@ export default {
                 value: 'id',
             },
             {
-                text: 'rut',
-                value: 'rut',
-            },
-            {
                 text: 'Nombre',
-                value: 'name',
+                value: 'description',
             },
             {
-                text: 'Apellido paterno',
-                value: 'lastname',
-            },
-            {
-                text: 'Apellido materno',
-                value: 'motherLastname',
-            },
-            {
-                text: 'Teléfono',
-                value: 'phone',
-            },
-            {
-                text: 'Correo electrónico',
-                value: 'email',
+                text: 'Fecha de creación',
+                value: 'createdAt',
             },
             {
                 text: 'Acciones',
@@ -112,7 +96,7 @@ export default {
     },
     computed: {
         ...mapGetters({
-            users: 'user/users',
+            typeReports: 'typeReport/typeReports',
         }),
     },
     methods: {

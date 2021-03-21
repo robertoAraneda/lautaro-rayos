@@ -23,7 +23,7 @@ export default {
         },
         PUT_USER: (state, user) => {
             const index = state.users.findIndex(
-                findUser => findUser.properties.id === user.properties.id
+                findUser => findUser.id === user.id
             );
             Object.assign(state.users[index], user);
         },
@@ -31,25 +31,6 @@ export default {
     getters: {
         users: state => {
             return state.users;
-        },
-        allUsers: state => {
-            return state.users
-                .map(({ properties }) => {
-                    return {
-                        id: properties.id,
-                        rut: properties.rut,
-                        name: properties.name,
-                        phone: properties.phone,
-                        mobile: properties.mobile,
-                        email: properties.email,
-                        role: properties.role,
-                        password: properties.password,
-                        isFirstLogin: properties.isFirstLogin,
-                    };
-                })
-                .filter(item => {
-                    return item.role.description !== 'Developer';
-                });
         },
     },
     actions: {
@@ -61,8 +42,6 @@ export default {
                 });
 
                 const { success, data, message } = await response.json();
-
-                console.log(data);
 
                 if (success) {
                     commit('SET_USERS', data.array);
@@ -77,13 +56,31 @@ export default {
         },
         postUser: async ({ commit }, user) => {
             try {
-                const URL = `${BASE_URL}/signup`;
-                const { data } = await axios.post(URL, user);
+                var raw = JSON.stringify({
+                    rut: user.rut,
+                    name: user.name,
+                    lastname: user.lastname,
+                    mother_lastname: user.motherLastname,
+                    email: user.email,
+                    password: user.possword,
+                    phone: user.phone,
+                });
 
-                const { _data, success, message, statusCode } = data;
+                const response = await fetch(`/api/v1/signup`, {
+                    method: 'POST',
+                    headers,
+                    body: raw,
+                });
+
+                const {
+                    success,
+                    statusCode,
+                    data,
+                    message,
+                } = await response.json();
 
                 if (statusCode === 201) {
-                    commit('SET_USER', _data);
+                    commit('SET_USER', data);
                     return { success, message };
                 } else if (statusCode === 406) {
                     return {
@@ -92,44 +89,64 @@ export default {
                     };
                 }
             } catch (error) {
-                console.log(error.message);
-                console.log(error.name);
+                console.log(error);
                 return { success: false, message: error.message };
             }
         },
         deleteUser: async ({ commit }, user) => {
             try {
-                const URL = `${BASE_URL}/${user.id}`;
-                const { data } = await axios.delete(URL);
+                const response = await fetch(`/api/v1/users/${user.id}`, {
+                    method: 'DELETE',
+                    headers,
+                });
 
-                const { success, message } = data;
+                const { success, message } = await response.json();
 
                 if (success) {
                     commit('DELETE_USER', user);
                 }
                 return { success, message };
             } catch (error) {
-                console.log(error.message);
-                console.log(error.name);
+                console.log(error);
                 return { success: false, message: error.message };
             }
         },
         putUser: async ({ commit }, user) => {
             try {
-                const URL = `${BASE_URL}/${user.id}`;
+                var raw = JSON.stringify({
+                    rut: user.rut,
+                    name: user.name,
+                    lastname: user.lastname,
+                    mother_lastname: user.motherLastname,
+                    email: user.email,
+                    password: user.possword,
+                    phone: user.phone,
+                });
 
-                const { data } = await axios.put(URL, user);
+                const response = await fetch(`/api/v1/users/${user.id}`, {
+                    method: 'PUT',
+                    headers,
+                    body: raw,
+                });
 
-                const { _data, success, message } = data;
+                const {
+                    success,
+                    statusCode,
+                    data,
+                    message,
+                } = await response.json();
 
-                if (success) {
-                    commit('PUT_USER', _data);
+                if (statusCode === 200) {
+                    commit('PUT_USER', data);
+                    return { success, message };
+                } else if (statusCode === 406) {
+                    return {
+                        success: false,
+                        message: { email: 'El email ya existe' },
+                    };
                 }
-
-                return { success, message };
             } catch (error) {
-                console.log(error.message);
-                console.log(error.name);
+                console.log(error);
                 return { success: false, message: error.message };
             }
         },
@@ -147,8 +164,7 @@ export default {
 
                 return { success, message };
             } catch (error) {
-                console.log(error.message);
-                console.log(error.name);
+                console.log(error);
                 return { success: false, message: error.message };
             }
         },

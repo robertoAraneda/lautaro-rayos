@@ -42,8 +42,6 @@ Vue.component('app', App);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-console.log('store');
-
 store.dispatch('auth/attempt', localStorage.getItem('access_token'));
 
 const app = new Vue({

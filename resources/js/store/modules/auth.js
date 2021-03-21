@@ -71,7 +71,6 @@ export default {
                     },
                 };
 
-                console.log('options', requestOptions);
                 const response = await fetch(
                     `${BASE_URL}/user`,
                     requestOptions
@@ -79,9 +78,6 @@ export default {
                 const { user } = await response.json();
 
                 commit('SET_LOGIN_USER', user);
-
-                console.log(user);
-
                 return { success: true };
             } catch (error) {
                 console.log(error);

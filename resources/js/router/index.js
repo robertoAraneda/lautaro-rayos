@@ -14,7 +14,7 @@ const routes = [
     },
     {
         path: '/laboratorio',
-        name: 'laboratorio',
+        name: 'Laboratory',
         component: Index,
         meta: { requiresAuth: true },
         children: [...settings],

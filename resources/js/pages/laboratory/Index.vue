@@ -1,19 +1,26 @@
 <template>
     <div>
-        <v-navigation-drawer permanent app color="burdeo">
-            <div class="white pa-2">
+        <v-navigation-drawer
+            app
+            color="burdeo"
+            v-model="drawer"
+            width="260"
+            mobile-breakpoint="960"
+            v-bind="$attrs"
+        >
+            <div class="grey lighten-5 pa-2">
                 <v-img :src="imageLab" contain max-height="100"></v-img>
             </div>
 
-            <v-list-item class="white">
+            <v-list-item class="burdeo" dark>
                 <v-list-item-content>
                     <v-list-item-title v-if="user" class="title text-center">
-                        {{ user.name }}
+                        {{ user.name }} {{ user.lastname }}
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
 
-            <v-divider class="grey"></v-divider>
+            <v-divider class="white pt-1"></v-divider>
 
             <v-list dense nav shaped dark>
                 <v-list-group
@@ -51,19 +58,17 @@
             </v-list>
         </v-navigation-drawer>
         <v-container fluid>
-            <v-breadcrumbs
-                class="white"
-                :items="breadcrumbs"
-                large
-            ></v-breadcrumbs>
-            <v-divider class="mb-3 pt-1 verde" />
+            <v-system-bar color="verde" dark class="mb-12">
+                <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
+            </v-system-bar>
+            <!--        <v-divider class="mb-3 pt-1 verde" /> -->
             <router-view></router-view>
         </v-container>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import imageLab from '../../assets/logo_definitivo.png';
 import imageHosp from '../../assets/LOGO_HOSP_LAUTARO_512.png';
 export default {
@@ -77,6 +82,10 @@ export default {
                         name: 'Funcionarios',
                         to: { name: 'SettingEmployee' },
                     },
+                    {
+                        name: 'Tipo reporte',
+                        to: { name: 'SettingTypeReport' },
+                    },
                 ],
             },
         ],
@@ -84,6 +93,7 @@ export default {
         imageHosp: imageHosp,
     }),
     computed: {
+        ...mapState(['drawer']),
         ...mapGetters({
             user: 'auth/user',
         }),
@@ -101,12 +111,19 @@ export default {
                 };
             });
         },
+        drawer: {
+            get() {
+                return this.$store.state.drawer;
+            },
+            set(val) {
+                this.$store.commit('SET_DRAWER', val);
+            },
+        },
     },
     methods: {
         capitalizeFirstLetter(string) {
             if (string.includes('-')) {
                 string = string.replace('-', ' ');
-                console.log(string);
             }
             if (string.search('gia')) {
                 string = string.replace('gia', 'gía');

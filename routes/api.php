@@ -31,5 +31,15 @@ Route::group([
   'prefix' => 'v1',
   'middleware' => 'auth:api'
 ], function () {
+    //funcionarios
+    Route::post('/signup', [App\Http\Controllers\AuthController::class, 'signup']);
     Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
+    Route::put('/users/{id}', [App\Http\Controllers\UserController::class, 'update']);
+    Route::delete('/users/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
+
+    //tipos de reporte
+    Route::post('/type-reports', [App\Http\Controllers\TypeReportController::class, 'store']);
+    Route::get('/type-reports', [App\Http\Controllers\TypeReportController::class, 'index']);
+    Route::put('/type-reports/{id}', [App\Http\Controllers\TypeReportController::class, 'update']);
+    Route::delete('/type-reports/{id}', [App\Http\Controllers\TypeReportController::class, 'destroy']);
 });

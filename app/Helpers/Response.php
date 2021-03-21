@@ -63,6 +63,11 @@ class Response
         return $this->parseResponse($error->getMessage(), 500);
     }
 
+    public function customMessageResponse($message)
+    {
+        return $this->parseResponse($message, 400);
+    }
+    
     private function parseResponse($message, $statusCode, $data = null, $success = false, $error = true)
     {
         return response()->json([

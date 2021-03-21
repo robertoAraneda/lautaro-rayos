@@ -3,8 +3,9 @@
 namespace App\Http\Resources\Object;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
-class UserObject extends JsonResource
+class TypeReportObject extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +17,8 @@ class UserObject extends JsonResource
     {
         return [
             'id'                => $this->id,
-            'rut'               => $this->rut,
-            'name'              => $this->name,
-            'lastname'          => $this->lastname,
-            'motherLastname'    => $this->mother_lastname,
-            'phone'             => $this->phone,
-            'email'             => $this->email
+            'description'       => $this->description,
+            'createdAt'         => Carbon::parse($this->created_at)->format('d-m-Y H:i'),
         ];
     }
 }
