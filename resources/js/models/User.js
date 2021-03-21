@@ -5,6 +5,7 @@ export default class User {
         name = '',
         lastname = '',
         motherLastname = '',
+        phone = '',
         email = '',
         password = ''
     ) {
@@ -12,6 +13,7 @@ export default class User {
         this.rut = rut;
         this.name = name;
         lastname = lastname;
+        phone = phone;
         motherLastname = motherLastname;
         this.email = email;
         this.password = password;

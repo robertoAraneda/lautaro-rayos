@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import es from 'vuetify/es5/locale/es';
 import App from './App.vue';
+import '@mdi/font/css/materialdesignicons.css';
 
 //support vuex
 import store from './store';
@@ -53,6 +54,18 @@ const app = new Vue({
         lang: {
             locales: { es },
             current: 'es',
+        },
+        theme: {
+            themes: {
+                light: {
+                    burdeo: '#731739', //'#027087'
+                    celeste: '#77ABD9',
+                    verde: '#1B8CA6',
+                },
+            },
+        },
+        icons: {
+            iconfont: 'mdi', // default - only for display purposes
         },
     }),
 });

@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@mdi/font": "^5.9.55",
         "chart.js": "^2.9.4",
         "jspdf": "^1.5.3",
         "jspdf-autotable": "^3.5.13",

@@ -25,3 +25,11 @@ Route::group([
       Route::get('logout', 'AuthController@logout');
   });
 });
+
+
+Route::group([
+  'prefix' => 'v1',
+  'middleware' => 'auth:api'
+], function () {
+    Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
+});
