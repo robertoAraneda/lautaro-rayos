@@ -1,10 +1,18 @@
 <template>
     <div>
-        <table-type-reports
-            @createItem="createItem"
-            @editItem="editItem"
-            @deleteItem="deleteItem"
-        />
+        <v-card>
+            <v-card-title class="body-1">
+                Lista tipos reporte
+            </v-card-title>
+            <v-divider class="pt-1 burdeo" />
+            <v-card-text>
+                <table-type-reports
+                    @createItem="createItem"
+                    @editItem="editItem"
+                    @deleteItem="deleteItem"
+                />
+            </v-card-text>
+        </v-card>
         <v-dialog
             v-model="dialog"
             transition="dialog-bottom-transition"

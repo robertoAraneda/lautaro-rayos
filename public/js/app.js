@@ -128,6 +128,99 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patient/TableFoundedPatient.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patient/TableFoundedPatient.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      headers: [{
+        text: 'rut',
+        value: 'rut'
+      }, {
+        text: 'bdup',
+        value: 'bdup'
+      }, {
+        text: 'Nombres',
+        value: 'names'
+      }, {
+        text: 'Apellido paterno',
+        value: 'lastname'
+      }, {
+        text: 'Apellido materno',
+        value: 'motherLastname'
+      }, {
+        text: 'Acciones',
+        value: 'actions',
+        sortable: false
+      }]
+    };
+  },
+  mounted: function mounted() {
+    this.initialize();
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
+    foundedPatients: 'patient/foundedPatients'
+  })),
+  methods: {
+    initialize: function initialize() {
+      var headerLength = this.headers.length;
+
+      for (var index = 0; index < headerLength; index++) {
+        Object.assign(this.headers[index], {
+          "class": ['grey--text', 'text-subtitle-2', 'font-weight-bold', 'text--darken-3']
+        });
+      }
+    },
+    createItem: function createItem() {
+      this.$emit('createItem');
+    },
+    editItem: function editItem(item) {
+      this.$emit('editItem', item);
+    },
+    deleteItem: function deleteItem(item) {
+      this.$emit('deleteItem', item);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/settings/typeReports/TableTypeReports.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/settings/typeReports/TableTypeReports.vue?vue&type=script&lang=js& ***!
@@ -753,6 +846,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -760,18 +854,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       items: [{
+        name: 'Paciente',
+        icon: 'mdi-account',
+        links: [{
+          name: 'Buscar paciente',
+          to: {
+            name: 'FindPatient'
+          },
+          icon: 'mdi-account-search'
+        }, {
+          name: 'Crear paciente',
+          to: {
+            name: 'CreatePatient'
+          },
+          icon: 'mdi-account-plus'
+        }]
+      }, {
         name: 'Configuración',
         icon: 'mdi-cog',
         links: [{
           name: 'Funcionarios',
           to: {
             name: 'SettingEmployee'
-          }
+          },
+          icon: 'mdi-account-group'
         }, {
           name: 'Tipo reporte',
           to: {
             name: 'SettingTypeReport'
-          }
+          },
+          icon: 'mdi-file-document-multiple'
         }]
       }],
       imageLab: _assets_logo_definitivo_png__WEBPACK_IMPORTED_MODULE_0__.default,
@@ -838,6 +950,421 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/CreatePatient.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/CreatePatient.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _models_Patient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../models/Patient */ "./resources/js/models/Patient.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      editedItem: new _models_Patient__WEBPACK_IMPORTED_MODULE_0__.default(),
+      defaultItem: new _models_Patient__WEBPACK_IMPORTED_MODULE_0__.default(),
+      editedIndex: -1,
+      dialog: false,
+      confirmDeleteDialog: false
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    setTimeout(function () {
+      _this.editedItem.rut = '15654738-7';
+      _this.editedItem.bdup = '45678';
+      _this.editedItem.names = 'roberto alejandro';
+      _this.editedItem.lastname = 'araneda';
+      _this.editedItem.motherLastname = 'espinoza';
+      _this.editedItem.birthDate = '06/12/1983';
+      _this.editedItem.phone = '+56958639620';
+      _this.editedItem.email = 'robaraneda@gmail.com';
+    }, 1000);
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
+    foundedPatients: 'patient/foundedPatients'
+  })),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)({
+    store: 'patient/postPatient'
+  })), {}, {
+    handleItem: function handleItem() {
+      if (this.editedIndex === -1) {
+        this.store(this.editedItem);
+      } else {
+        this.update(this.editedItem);
+      }
+    }
+  })
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/FindPatient.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/FindPatient.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _components_patient_TableFoundedPatient_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @components/patient/TableFoundedPatient.vue */ "./resources/js/components/patient/TableFoundedPatient.vue");
+/* harmony import */ var _models_Patient__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @models/Patient */ "./resources/js/models/Patient.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    TableFoundedPatient: _components_patient_TableFoundedPatient_vue__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  data: function data() {
+    return {
+      editedItem: new _models_Patient__WEBPACK_IMPORTED_MODULE_1__.default()
+    };
+  },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
+    foundedPatients: 'patient/foundedPatients'
+  })), {}, {
+    rut: function rut() {
+      return this.editedItem.rut !== '';
+    },
+    bdup: function bdup() {
+      return this.editedItem.bdup !== '';
+    },
+    names: function names() {
+      return this.editedItem.names !== '';
+    },
+    lastname: function lastname() {
+      return this.editedItem.lastname !== '';
+    },
+    motherLastname: function motherLastname() {
+      return this.editedItem.motherLastname !== '';
+    },
+    numberOfFindedUsers: function numberOfFindedUsers() {
+      return this.foundedPatients.length;
+    }
+  }),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)({
+    findByDemographics: 'patient/fetchFoundedPatients',
+    findByRut: 'patient/findPatientByRut',
+    findByBdup: 'patient/findPatientByBdup'
+  })), {}, {
+    handleSearch: function handleSearch() {
+      if (this.rut) {
+        this.prepareRut();
+        this.findByRut(this.editedItem);
+      } else if (this.bdup) {
+        this.prepareBdup();
+        this.findByBdup(this.editedItem);
+      } else {
+        this.prepareDemographics();
+        this.findByDemographics(this.editedItem);
+      }
+    },
+    prepareRut: function prepareRut() {
+      this.editedItem.bdup = '';
+      this.editedItem.names = '';
+      this.editedItem.lastname = '';
+      this.editedItem.motherLastname = '';
+    },
+    prepareBdup: function prepareBdup() {
+      this.editedItem.rut = '';
+      this.editedItem.names = '';
+      this.editedItem.lastname = '';
+      this.editedItem.motherLastname = '';
+    },
+    prepareDemographics: function prepareDemographics() {
+      this.editedItem.bdup = '';
+      this.editedItem.rut = '';
+    },
+    clearFields: function clearFields() {
+      this.editedItem.rut = '';
+      this.editedItem.bdup = '';
+      this.editedItem.names = '';
+      this.editedItem.lastname = '';
+      this.editedItem.motherLastname = '';
+    }
+  })
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/Index.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/Index.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/settings/Index.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/settings/Index.vue?vue&type=script&lang=js& ***!
@@ -879,6 +1406,14 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1204,6 +1739,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1365,6 +1908,47 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__.default({
 
 /***/ }),
 
+/***/ "./resources/js/models/Patient.js":
+/*!****************************************!*\
+  !*** ./resources/js/models/Patient.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Patient)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Patient = function Patient() {
+  var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var rut = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var bdup = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var names = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+  var lastname = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+  var motherLastname = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : '';
+  var birthDate = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : '';
+  var email = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : '';
+  var phone = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : '';
+
+  _classCallCheck(this, Patient);
+
+  this.id = id;
+  this.rut = rut;
+  this.bdup = bdup;
+  this.names = names;
+  this.lastname = lastname;
+  this.motherLastname = motherLastname;
+  this.birthDate = birthDate;
+  this.email = email;
+  this.phone = phone;
+};
+
+
+
+/***/ }),
+
 /***/ "./resources/js/models/User.js":
 /*!*************************************!*\
   !*** ./resources/js/models/User.js ***!
@@ -1415,11 +1999,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _pages_Login_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pages/Login.vue */ "./resources/js/pages/Login.vue");
 /* harmony import */ var _pages_laboratory_Index_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/laboratory/Index.vue */ "./resources/js/pages/laboratory/Index.vue");
 /* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./settings */ "./resources/js/router/settings.js");
+/* harmony import */ var _patient__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./patient */ "./resources/js/router/patient.js");
 /* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -1438,7 +2023,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_3__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_4__.default);
+
+vue__WEBPACK_IMPORTED_MODULE_4__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_5__.default);
 var routes = [{
   path: '/login',
   name: 'Login',
@@ -1450,9 +2036,9 @@ var routes = [{
   meta: {
     requiresAuth: true
   },
-  children: _toConsumableArray(_settings__WEBPACK_IMPORTED_MODULE_2__.settings)
+  children: [].concat(_toConsumableArray(_settings__WEBPACK_IMPORTED_MODULE_2__.settings), _toConsumableArray(_patient__WEBPACK_IMPORTED_MODULE_3__.patient))
 }];
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__.default({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__.default({
   mode: 'history',
   base: process.env.BASE_URL,
   linkExactActiveClass: 'is-active',
@@ -1470,6 +2056,48 @@ router.beforeEach(function (to, from, next) {
   next();
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
+
+/***/ }),
+
+/***/ "./resources/js/router/patient.js":
+/*!****************************************!*\
+  !*** ./resources/js/router/patient.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "patient": () => (/* binding */ patient)
+/* harmony export */ });
+/* harmony import */ var _pages_laboratory_patient_Index_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pages/laboratory/patient/Index.vue */ "./resources/js/pages/laboratory/patient/Index.vue");
+/* harmony import */ var _pages_laboratory_patient_FindPatient_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/laboratory/patient/FindPatient.vue */ "./resources/js/pages/laboratory/patient/FindPatient.vue");
+/* harmony import */ var _pages_laboratory_patient_CreatePatient_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/laboratory/patient/CreatePatient.vue */ "./resources/js/pages/laboratory/patient/CreatePatient.vue");
+
+
+
+var patient = [{
+  path: 'paciente',
+  name: 'Index',
+  component: _pages_laboratory_patient_Index_vue__WEBPACK_IMPORTED_MODULE_0__.default,
+  meta: {
+    requiresAuth: true
+  }
+}, {
+  path: 'paciente/buscar',
+  name: 'FindPatient',
+  component: _pages_laboratory_patient_FindPatient_vue__WEBPACK_IMPORTED_MODULE_1__.default,
+  meta: {
+    requiresAuth: true
+  }
+}, {
+  path: 'paciente/crear',
+  name: 'CreatePatient',
+  component: _pages_laboratory_patient_CreatePatient_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+  meta: {
+    requiresAuth: true
+  }
+}];
 
 /***/ }),
 
@@ -1569,22 +2197,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/auth */ "./resources/js/store/modules/auth.js");
 /* harmony import */ var _modules_user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/user */ "./resources/js/store/modules/user.js");
 /* harmony import */ var _modules_typeReport__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/typeReport */ "./resources/js/store/modules/typeReport.js");
+/* harmony import */ var _modules_patient__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/patient */ "./resources/js/store/modules/patient.js");
 
 
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_3__.default.use(vuex__WEBPACK_IMPORTED_MODULE_4__.default);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
+
+vue__WEBPACK_IMPORTED_MODULE_4__.default.use(vuex__WEBPACK_IMPORTED_MODULE_5__.default);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_5__.default.Store({
   modules: {
     auth: _modules_auth__WEBPACK_IMPORTED_MODULE_0__.default,
     user: _modules_user__WEBPACK_IMPORTED_MODULE_1__.default,
-    typeReport: _modules_typeReport__WEBPACK_IMPORTED_MODULE_2__.default
+    typeReport: _modules_typeReport__WEBPACK_IMPORTED_MODULE_2__.default,
+    patient: _modules_patient__WEBPACK_IMPORTED_MODULE_3__.default
   },
   state: {
     drawer: true
@@ -1831,6 +2462,451 @@ var BASE_URL = '/api/auth';
       }
 
       return logout;
+    }()
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/patient.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/modules/patient.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/fetch */ "./resources/js/services/fetch.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var BASE_URL = '/api/v1/patients';
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  namespaced: true,
+  state: {
+    foundedPatients: [],
+    patient: null
+  },
+  mutations: {
+    SET_FOUNDED_PATIENTS: function SET_FOUNDED_PATIENTS(state, payload) {
+      state.foundedPatients = [];
+      state.foundedPatients = payload;
+    },
+    SET_PATIENT: function SET_PATIENT(state, payload) {
+      state.typeReports.push(payload);
+    }
+  },
+  getters: {
+    foundedPatients: function foundedPatients(state) {
+      return state.foundedPatients;
+    },
+    patient: function patient(state) {
+      return state.patient;
+    }
+  },
+  actions: {
+    fetchFoundedPatients: function () {
+      var _fetchFoundedPatients = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(_ref, payload) {
+        var commit, raw, response, _yield$response$json, success, data, message;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit;
+                _context.prev = 1;
+                raw = JSON.stringify({
+                  names: payload.names,
+                  lastname: payload.lastname,
+                  mother_lastname: payload.motherLastname
+                });
+                _context.next = 5;
+                return fetch("".concat(BASE_URL, "/find/demographics"), {
+                  method: 'POST',
+                  headers: _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default,
+                  body: raw
+                });
+
+              case 5:
+                response = _context.sent;
+                _context.next = 8;
+                return response.json();
+
+              case 8:
+                _yield$response$json = _context.sent;
+                success = _yield$response$json.success;
+                data = _yield$response$json.data;
+                message = _yield$response$json.message;
+
+                if (success) {
+                  commit('SET_FOUNDED_PATIENTS', data.array);
+                } else {
+                  console.log(error);
+                }
+
+                return _context.abrupt("return", {
+                  success: success,
+                  message: message
+                });
+
+              case 16:
+                _context.prev = 16;
+                _context.t0 = _context["catch"](1);
+                console.log(_context.t0);
+
+              case 19:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[1, 16]]);
+      }));
+
+      function fetchFoundedPatients(_x, _x2) {
+        return _fetchFoundedPatients.apply(this, arguments);
+      }
+
+      return fetchFoundedPatients;
+    }(),
+    findPatientByRut: function () {
+      var _findPatientByRut = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(_ref2, payload) {
+        var commit, rut, response, _yield$response$json2, success, data, message;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                commit = _ref2.commit;
+                _context2.prev = 1;
+                rut = payload.rut;
+                _context2.next = 5;
+                return fetch("".concat(BASE_URL, "/find/rut/").concat(rut), {
+                  method: 'GET',
+                  headers: _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default
+                });
+
+              case 5:
+                response = _context2.sent;
+                _context2.next = 8;
+                return response.json();
+
+              case 8:
+                _yield$response$json2 = _context2.sent;
+                success = _yield$response$json2.success;
+                data = _yield$response$json2.data;
+                message = _yield$response$json2.message;
+
+                if (success) {
+                  commit('SET_FOUNDED_PATIENTS', data.array);
+                } else {
+                  console.log(error);
+                }
+
+                return _context2.abrupt("return", {
+                  success: success,
+                  message: message
+                });
+
+              case 16:
+                _context2.prev = 16;
+                _context2.t0 = _context2["catch"](1);
+                console.log(_context2.t0);
+
+              case 19:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[1, 16]]);
+      }));
+
+      function findPatientByRut(_x3, _x4) {
+        return _findPatientByRut.apply(this, arguments);
+      }
+
+      return findPatientByRut;
+    }(),
+    findPatientByBdup: function () {
+      var _findPatientByBdup = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(_ref3, payload) {
+        var commit, bdup, response, _yield$response$json3, success, data, message;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                commit = _ref3.commit;
+                _context3.prev = 1;
+                bdup = payload.bdup;
+                _context3.next = 5;
+                return fetch("".concat(BASE_URL, "/find/bdup/").concat(bdup), {
+                  method: 'GET',
+                  headers: _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default
+                });
+
+              case 5:
+                response = _context3.sent;
+                _context3.next = 8;
+                return response.json();
+
+              case 8:
+                _yield$response$json3 = _context3.sent;
+                success = _yield$response$json3.success;
+                data = _yield$response$json3.data;
+                message = _yield$response$json3.message;
+
+                if (success) {
+                  commit('SET_FOUNDED_PATIENTS', data.array);
+                } else {
+                  console.log(error);
+                }
+
+                return _context3.abrupt("return", {
+                  success: success,
+                  message: message
+                });
+
+              case 16:
+                _context3.prev = 16;
+                _context3.t0 = _context3["catch"](1);
+                console.log(_context3.t0);
+
+              case 19:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[1, 16]]);
+      }));
+
+      function findPatientByBdup(_x5, _x6) {
+        return _findPatientByBdup.apply(this, arguments);
+      }
+
+      return findPatientByBdup;
+    }(),
+    postPatient: function () {
+      var _postPatient = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(_ref4, payload) {
+        var commit, raw, response, _yield$response$json4, success, data, message;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                commit = _ref4.commit;
+                _context4.prev = 1;
+                raw = JSON.stringify({
+                  rut: payload.rut,
+                  bdup: payload.bdup,
+                  names: payload.names,
+                  lastname: payload.lastname,
+                  mother_lastname: payload.motherLastname,
+                  birthdate: payload.birthDate,
+                  email: payload.email,
+                  phone: payload.phone
+                });
+                _context4.next = 5;
+                return fetch(BASE_URL, {
+                  method: 'POST',
+                  headers: _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default,
+                  body: raw
+                });
+
+              case 5:
+                response = _context4.sent;
+                _context4.next = 8;
+                return response.json();
+
+              case 8:
+                _yield$response$json4 = _context4.sent;
+                success = _yield$response$json4.success;
+                data = _yield$response$json4.data;
+                message = _yield$response$json4.message;
+
+                if (!success) {
+                  _context4.next = 17;
+                  break;
+                }
+
+                commit('SET_PATIENT', data);
+                return _context4.abrupt("return", {
+                  success: success,
+                  message: message
+                });
+
+              case 17:
+                return _context4.abrupt("return", {
+                  success: false,
+                  message: message
+                });
+
+              case 18:
+                _context4.next = 24;
+                break;
+
+              case 20:
+                _context4.prev = 20;
+                _context4.t0 = _context4["catch"](1);
+                console.log(_context4.t0);
+                return _context4.abrupt("return", {
+                  success: false,
+                  message: _context4.t0.message
+                });
+
+              case 24:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[1, 20]]);
+      }));
+
+      function postPatient(_x7, _x8) {
+        return _postPatient.apply(this, arguments);
+      }
+
+      return postPatient;
+    }(),
+    deleteTypeReport: function () {
+      var _deleteTypeReport = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(_ref5, payload) {
+        var commit, response, _yield$response$json5, success, message;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                commit = _ref5.commit;
+                _context5.prev = 1;
+                _context5.next = 4;
+                return fetch("".concat(BASE_URL, "/").concat(payload.id), {
+                  method: 'DELETE',
+                  headers: _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default
+                });
+
+              case 4:
+                response = _context5.sent;
+                _context5.next = 7;
+                return response.json();
+
+              case 7:
+                _yield$response$json5 = _context5.sent;
+                success = _yield$response$json5.success;
+                message = _yield$response$json5.message;
+
+                if (success) {
+                  commit('DELETE_TYPE_REPORT', payload);
+                }
+
+                return _context5.abrupt("return", {
+                  success: success,
+                  message: message
+                });
+
+              case 14:
+                _context5.prev = 14;
+                _context5.t0 = _context5["catch"](1);
+                console.log(_context5.t0);
+                return _context5.abrupt("return", {
+                  success: false,
+                  message: _context5.t0.message
+                });
+
+              case 18:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[1, 14]]);
+      }));
+
+      function deleteTypeReport(_x9, _x10) {
+        return _deleteTypeReport.apply(this, arguments);
+      }
+
+      return deleteTypeReport;
+    }(),
+    putTypeReport: function () {
+      var _putTypeReport = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(_ref6, payload) {
+        var commit, raw, response, _yield$response$json6, success, data, message;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                commit = _ref6.commit;
+                _context6.prev = 1;
+                raw = JSON.stringify({
+                  description: payload.description
+                });
+                _context6.next = 5;
+                return fetch("".concat(BASE_URL, "/").concat(payload.id), {
+                  method: 'PUT',
+                  headers: _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default,
+                  body: raw
+                });
+
+              case 5:
+                response = _context6.sent;
+                _context6.next = 8;
+                return response.json();
+
+              case 8:
+                _yield$response$json6 = _context6.sent;
+                success = _yield$response$json6.success;
+                data = _yield$response$json6.data;
+                message = _yield$response$json6.message;
+
+                if (!success) {
+                  _context6.next = 17;
+                  break;
+                }
+
+                commit('PUT_TYPE_REPORT', data);
+                return _context6.abrupt("return", {
+                  success: success,
+                  message: message
+                });
+
+              case 17:
+                return _context6.abrupt("return", {
+                  success: false,
+                  message: message
+                });
+
+              case 18:
+                _context6.next = 24;
+                break;
+
+              case 20:
+                _context6.prev = 20;
+                _context6.t0 = _context6["catch"](1);
+                console.log(_context6.t0);
+                return _context6.abrupt("return", {
+                  success: false,
+                  message: _context6.t0.message
+                });
+
+              case 24:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, null, [[1, 20]]);
+      }));
+
+      function putTypeReport(_x11, _x12) {
+        return _putTypeReport.apply(this, arguments);
+      }
+
+      return putTypeReport;
     }()
   }
 });
@@ -7327,6 +8403,45 @@ component.options.__file = "resources/js/App.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/patient/TableFoundedPatient.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/patient/TableFoundedPatient.vue ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _TableFoundedPatient_vue_vue_type_template_id_76ed066d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TableFoundedPatient.vue?vue&type=template&id=76ed066d&scoped=true& */ "./resources/js/components/patient/TableFoundedPatient.vue?vue&type=template&id=76ed066d&scoped=true&");
+/* harmony import */ var _TableFoundedPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFoundedPatient.vue?vue&type=script&lang=js& */ "./resources/js/components/patient/TableFoundedPatient.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _TableFoundedPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _TableFoundedPatient_vue_vue_type_template_id_76ed066d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _TableFoundedPatient_vue_vue_type_template_id_76ed066d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "76ed066d",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/patient/TableFoundedPatient.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/settings/typeReports/TableTypeReports.vue":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/settings/typeReports/TableTypeReports.vue ***!
@@ -7483,6 +8598,123 @@ component.options.__file = "resources/js/pages/laboratory/Index.vue"
 
 /***/ }),
 
+/***/ "./resources/js/pages/laboratory/patient/CreatePatient.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/pages/laboratory/patient/CreatePatient.vue ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CreatePatient_vue_vue_type_template_id_a9be7568_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreatePatient.vue?vue&type=template&id=a9be7568&scoped=true& */ "./resources/js/pages/laboratory/patient/CreatePatient.vue?vue&type=template&id=a9be7568&scoped=true&");
+/* harmony import */ var _CreatePatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreatePatient.vue?vue&type=script&lang=js& */ "./resources/js/pages/laboratory/patient/CreatePatient.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _CreatePatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _CreatePatient_vue_vue_type_template_id_a9be7568_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CreatePatient_vue_vue_type_template_id_a9be7568_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "a9be7568",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/laboratory/patient/CreatePatient.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/laboratory/patient/FindPatient.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/pages/laboratory/patient/FindPatient.vue ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _FindPatient_vue_vue_type_template_id_31a8bf2f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FindPatient.vue?vue&type=template&id=31a8bf2f&scoped=true& */ "./resources/js/pages/laboratory/patient/FindPatient.vue?vue&type=template&id=31a8bf2f&scoped=true&");
+/* harmony import */ var _FindPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FindPatient.vue?vue&type=script&lang=js& */ "./resources/js/pages/laboratory/patient/FindPatient.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _FindPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _FindPatient_vue_vue_type_template_id_31a8bf2f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _FindPatient_vue_vue_type_template_id_31a8bf2f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "31a8bf2f",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/laboratory/patient/FindPatient.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/laboratory/patient/Index.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/pages/laboratory/patient/Index.vue ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Index_vue_vue_type_template_id_1dd27e35_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=template&id=1dd27e35&scoped=true& */ "./resources/js/pages/laboratory/patient/Index.vue?vue&type=template&id=1dd27e35&scoped=true&");
+/* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/pages/laboratory/patient/Index.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Index_vue_vue_type_template_id_1dd27e35_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Index_vue_vue_type_template_id_1dd27e35_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "1dd27e35",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/laboratory/patient/Index.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/pages/laboratory/settings/Index.vue":
 /*!**********************************************************!*\
   !*** ./resources/js/pages/laboratory/settings/Index.vue ***!
@@ -7616,6 +8848,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/patient/TableFoundedPatient.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/patient/TableFoundedPatient.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableFoundedPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TableFoundedPatient.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patient/TableFoundedPatient.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableFoundedPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/settings/typeReports/TableTypeReports.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************!*\
   !*** ./resources/js/components/settings/typeReports/TableTypeReports.vue?vue&type=script&lang=js& ***!
@@ -7676,6 +8924,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/Index.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/laboratory/patient/CreatePatient.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/pages/laboratory/patient/CreatePatient.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreatePatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreatePatient.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/CreatePatient.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreatePatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/laboratory/patient/FindPatient.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/pages/laboratory/patient/FindPatient.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FindPatient.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/FindPatient.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/laboratory/patient/Index.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/pages/laboratory/patient/Index.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/Index.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
@@ -7745,6 +9041,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/patient/TableFoundedPatient.vue?vue&type=template&id=76ed066d&scoped=true&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/patient/TableFoundedPatient.vue?vue&type=template&id=76ed066d&scoped=true& ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableFoundedPatient_vue_vue_type_template_id_76ed066d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableFoundedPatient_vue_vue_type_template_id_76ed066d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableFoundedPatient_vue_vue_type_template_id_76ed066d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TableFoundedPatient.vue?vue&type=template&id=76ed066d&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patient/TableFoundedPatient.vue?vue&type=template&id=76ed066d&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/settings/typeReports/TableTypeReports.vue?vue&type=template&id=73372e1c&scoped=true&":
 /*!**********************************************************************************************************************!*\
   !*** ./resources/js/components/settings/typeReports/TableTypeReports.vue?vue&type=template&id=73372e1c&scoped=true& ***!
@@ -7809,6 +9122,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_fd9d5482_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_fd9d5482_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=template&id=fd9d5482&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/Index.vue?vue&type=template&id=fd9d5482&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/laboratory/patient/CreatePatient.vue?vue&type=template&id=a9be7568&scoped=true&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/pages/laboratory/patient/CreatePatient.vue?vue&type=template&id=a9be7568&scoped=true& ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreatePatient_vue_vue_type_template_id_a9be7568_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreatePatient_vue_vue_type_template_id_a9be7568_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreatePatient_vue_vue_type_template_id_a9be7568_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreatePatient.vue?vue&type=template&id=a9be7568&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/CreatePatient.vue?vue&type=template&id=a9be7568&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/laboratory/patient/FindPatient.vue?vue&type=template&id=31a8bf2f&scoped=true&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/pages/laboratory/patient/FindPatient.vue?vue&type=template&id=31a8bf2f&scoped=true& ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPatient_vue_vue_type_template_id_31a8bf2f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPatient_vue_vue_type_template_id_31a8bf2f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FindPatient_vue_vue_type_template_id_31a8bf2f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FindPatient.vue?vue&type=template&id=31a8bf2f&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/FindPatient.vue?vue&type=template&id=31a8bf2f&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/laboratory/patient/Index.vue?vue&type=template&id=1dd27e35&scoped=true&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/pages/laboratory/patient/Index.vue?vue&type=template&id=1dd27e35&scoped=true& ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_1dd27e35_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_1dd27e35_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_1dd27e35_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=template&id=1dd27e35&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/Index.vue?vue&type=template&id=1dd27e35&scoped=true&");
 
 
 /***/ }),
@@ -7968,6 +9332,98 @@ var render = function() {
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patient/TableFoundedPatient.vue?vue&type=template&id=76ed066d&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patient/TableFoundedPatient.vue?vue&type=template&id=76ed066d&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.foundedPatients
+    ? _c(
+        "v-card",
+        [
+          _c("v-data-table", {
+            attrs: { headers: _vm.headers, items: _vm.foundedPatients },
+            scopedSlots: _vm._u(
+              [
+                {
+                  key: "item.actions",
+                  fn: function(ref) {
+                    var item = ref.item
+                    return [
+                      _c(
+                        "v-tooltip",
+                        {
+                          attrs: { color: "verde darken-1", bottom: "" },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "activator",
+                                fn: function(ref) {
+                                  var on = ref.on
+                                  return [
+                                    _c(
+                                      "v-btn",
+                                      _vm._g(
+                                        {
+                                          attrs: {
+                                            color: "verde",
+                                            icon: "",
+                                            text: ""
+                                          }
+                                        },
+                                        on
+                                      ),
+                                      [
+                                        _c("v-icon", [
+                                          _vm._v(
+                                            "\n                            mdi-account-search\n                        "
+                                          )
+                                        ])
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          )
+                        },
+                        [_vm._v(" "), _c("span", [_vm._v("Editar")])]
+                      )
+                    ]
+                  }
+                }
+              ],
+              null,
+              false,
+              3160628305
+            )
+          })
+        ],
+        1
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -8762,7 +10218,7 @@ var render = function() {
                               [
                                 _c(
                                   "v-list-item-title",
-                                  { staticClass: "body-1" },
+                                  { staticClass: "body-2" },
                                   [_vm._v(_vm._s(link.name))]
                                 )
                               ],
@@ -8778,6 +10234,8 @@ var render = function() {
                   )
                 },
                 [
+                  _vm._v(" "),
+                  _c("v-divider"),
                   _vm._v(" "),
                   _vm._l(link.links, function(internalLink) {
                     return _c(
@@ -8801,7 +10259,7 @@ var render = function() {
                           ? _c(
                               "v-list-item-icon",
                               [
-                                _c("v-icon", [
+                                _c("v-icon", { attrs: { small: "" } }, [
                                   _vm._v(_vm._s(internalLink.icon))
                                 ])
                               ],
@@ -8828,8 +10286,12 @@ var render = function() {
         [
           _c(
             "v-system-bar",
-            { staticClass: "mb-12", attrs: { color: "verde", dark: "" } },
-            [_c("v-breadcrumbs", { attrs: { items: _vm.breadcrumbs } })],
+            { staticClass: "mb-12", attrs: { color: "white" } },
+            [
+              _c("v-breadcrumbs", {
+                attrs: { large: "", items: _vm.breadcrumbs }
+              })
+            ],
             1
           ),
           _vm._v(" "),
@@ -8840,6 +10302,592 @@ var render = function() {
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/CreatePatient.vue?vue&type=template&id=a9be7568&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/CreatePatient.vue?vue&type=template&id=a9be7568&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-card",
+        [
+          _c("v-card-title", { staticClass: "body-1" }, [
+            _vm._v("\n            Crear paciente\n        ")
+          ]),
+          _vm._v(" "),
+          _c("v-divider", { staticClass: "pt-1 burdeo" }),
+          _vm._v(" "),
+          _c(
+            "v-card-text",
+            [
+              _c(
+                "v-row",
+                { staticClass: "d-flex" },
+                [
+                  _c(
+                    "v-col",
+                    { staticClass: "mx-auto", attrs: { cols: "12" } },
+                    [
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Rut",
+                                  required: "",
+                                  placeholder: "Rut",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.rut,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "rut", $$v)
+                                  },
+                                  expression: "editedItem.rut"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Bdup",
+                                  required: "",
+                                  placeholder: "Bdup",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.bdup,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "bdup", $$v)
+                                  },
+                                  expression: "editedItem.bdup"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Nombres",
+                                  required: "",
+                                  placeholder: "Nombres",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.names,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "names", $$v)
+                                  },
+                                  expression: "editedItem.names"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Apellido paterno",
+                                  required: "",
+                                  placeholder: "Apellido paterno",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.lastname,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "lastname", $$v)
+                                  },
+                                  expression: "editedItem.lastname"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Apellido materno",
+                                  required: "",
+                                  placeholder: "Apellido materno",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.motherLastname,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.editedItem,
+                                      "motherLastname",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "editedItem.motherLastname"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Fecha de nacimiento",
+                                  required: "",
+                                  placeholder: "Fecha de nacimiento",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.birthDate,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "birthDate", $$v)
+                                  },
+                                  expression: "editedItem.birthDate"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Correo electrónico",
+                                  required: "",
+                                  placeholder: "Correo electrónico",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.email,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "email", $$v)
+                                  },
+                                  expression: "editedItem.email"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Teléfono",
+                                  required: "",
+                                  placeholder: "Teléfono",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.phone,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "phone", $$v)
+                                  },
+                                  expression: "editedItem.phone"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-card-actions", { staticClass: "d-flex" }, [
+            _c(
+              "div",
+              { staticClass: "ml-auto" },
+              [
+                _c(
+                  "v-btn",
+                  { attrs: { text: "", color: "secondary", dark: "" } },
+                  [_vm._v("Limpiar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { text: "", color: "burdeo", dark: "" },
+                    on: { click: _vm.handleItem }
+                  },
+                  [_vm._v("Crear")]
+                )
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-card")
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/FindPatient.vue?vue&type=template&id=31a8bf2f&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/FindPatient.vue?vue&type=template&id=31a8bf2f&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-card",
+        [
+          _c("v-card-title", { staticClass: "body-1" }, [
+            _vm._v("\n            Buscar paciente\n        ")
+          ]),
+          _vm._v(" "),
+          _c("v-divider", { staticClass: "pt-1 burdeo" }),
+          _vm._v(" "),
+          _c(
+            "v-card-text",
+            [
+              _c(
+                "v-row",
+                { staticClass: "d-flex" },
+                [
+                  _c(
+                    "v-col",
+                    { staticClass: "mx-auto", attrs: { cols: "10" } },
+                    [
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Rut",
+                                  required: "",
+                                  placeholder: "Rut",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.rut,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "rut", $$v)
+                                  },
+                                  expression: "editedItem.rut"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Bdup",
+                                  required: "",
+                                  placeholder: "Bdup",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.bdup,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "bdup", $$v)
+                                  },
+                                  expression: "editedItem.bdup"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "4" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Nombres",
+                                  required: "",
+                                  placeholder: "Nombres",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.names,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "names", $$v)
+                                  },
+                                  expression: "editedItem.names"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "4" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Apellido paterno",
+                                  required: "",
+                                  placeholder: "Apellido paterno",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.lastname,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "lastname", $$v)
+                                  },
+                                  expression: "editedItem.lastname"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "4" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Apellido materno",
+                                  required: "",
+                                  placeholder: "Apellido materno",
+                                  outlined: "",
+                                  dense: "",
+                                  color: "burdeo"
+                                },
+                                model: {
+                                  value: _vm.editedItem.motherLastname,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.editedItem,
+                                      "motherLastname",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "editedItem.motherLastname"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-card-actions", { staticClass: "d-flex" }, [
+            _c(
+              "div",
+              { staticClass: "ml-auto" },
+              [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { text: "", color: "secondary", dark: "" },
+                    on: { click: _vm.clearFields }
+                  },
+                  [_vm._v("Limpiar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { text: "", color: "burdeo", dark: "" },
+                    on: { click: _vm.handleSearch }
+                  },
+                  [_vm._v("Buscar")]
+                )
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-card",
+        { staticClass: "mt-3" },
+        [
+          _c(
+            "v-card-title",
+            { staticClass: "body-1" },
+            [
+              _c(
+                "v-badge",
+                {
+                  attrs: {
+                    content: _vm.numberOfFindedUsers,
+                    value: _vm.numberOfFindedUsers,
+                    color: "verde",
+                    overlap: ""
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                Pacientes encontrados\n                "
+                  ),
+                  _c("v-icon", { attrs: { color: "burdeo", large: "" } }, [
+                    _vm._v(
+                      "\n                    mdi-account\n                "
+                    )
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-divider", { staticClass: "pt-1 burdeo" }),
+          _vm._v(" "),
+          _c("v-card-text", [_c("table-founded-patient")], 1)
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/Index.vue?vue&type=template&id=1dd27e35&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/laboratory/patient/Index.vue?vue&type=template&id=1dd27e35&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_vm._v("\n    index\n")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -8892,13 +10940,31 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("table-type-reports", {
-        on: {
-          createItem: _vm.createItem,
-          editItem: _vm.editItem,
-          deleteItem: _vm.deleteItem
-        }
-      }),
+      _c(
+        "v-card",
+        [
+          _c("v-card-title", { staticClass: "body-1" }, [
+            _vm._v("\n            Lista tipos reporte\n        ")
+          ]),
+          _vm._v(" "),
+          _c("v-divider", { staticClass: "pt-1 burdeo" }),
+          _vm._v(" "),
+          _c(
+            "v-card-text",
+            [
+              _c("table-type-reports", {
+                on: {
+                  createItem: _vm.createItem,
+                  editItem: _vm.editItem,
+                  deleteItem: _vm.deleteItem
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("v-dialog", {
         attrs: {
@@ -9115,13 +11181,31 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("table-users", {
-        on: {
-          createItem: _vm.createItem,
-          editItem: _vm.editItem,
-          deleteItem: _vm.deleteItem
-        }
-      }),
+      _c(
+        "v-card",
+        [
+          _c("v-card-title", { staticClass: "body-1" }, [
+            _vm._v("\n            Lista funcionarios\n        ")
+          ]),
+          _vm._v(" "),
+          _c("v-divider", { staticClass: "pt-1 burdeo" }),
+          _vm._v(" "),
+          _c(
+            "v-card-text",
+            [
+              _c("table-users", {
+                on: {
+                  createItem: _vm.createItem,
+                  editItem: _vm.editItem,
+                  deleteItem: _vm.deleteItem
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("v-dialog", {
         attrs: {

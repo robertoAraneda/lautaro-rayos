@@ -42,4 +42,12 @@ Route::group([
     Route::get('/type-reports', [App\Http\Controllers\TypeReportController::class, 'index']);
     Route::put('/type-reports/{id}', [App\Http\Controllers\TypeReportController::class, 'update']);
     Route::delete('/type-reports/{id}', [App\Http\Controllers\TypeReportController::class, 'destroy']);
+
+    //patient
+    Route::post('/patients', [App\Http\Controllers\PatientController::class, 'store']);
+    Route::put('/patients/{id}', [App\Http\Controllers\PatientController::class, 'update']);
+    Route::delete('/patients{id}', [App\Http\Controllers\PatientController::class, 'destroy']);
+    Route::get('/patients/find/rut/{rut}', [App\Http\Controllers\PatientController::class, 'findByRut']);
+    Route::get('/patients/find/bdup/{bdup}', [App\Http\Controllers\PatientController::class, 'findByBdup']);
+    Route::post('/patients/find/demographics', [App\Http\Controllers\PatientController::class, 'findPatientByDemographics']);
 });

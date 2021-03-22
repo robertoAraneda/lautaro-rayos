@@ -20,7 +20,7 @@ class TypeReportRepository
     {
         $model =  new TypeReport;
 
-        $model->description = $request->description;
+        $model->description = strtoupper($request->description);
         $model->user_created_id = auth()->id();
 
         $model->save();
@@ -31,7 +31,7 @@ class TypeReportRepository
 
     public function update($model, $request)
     {
-        $model->description = $request->description;
+        $model->description = strtoupper($request->description);
         $model->user_updated_id = auth()->id();
 
         $model->save();

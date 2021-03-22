@@ -32,11 +32,12 @@
                 >
                     <template v-slot:activator>
                         <v-list-item>
-                            <v-list-item-title class="body-1">{{
+                            <v-list-item-title class="body-2">{{
                                 link.name
                             }}</v-list-item-title>
                         </v-list-item>
                     </template>
+                    <v-divider />
                     <v-list-item
                         v-for="internalLink in link.links"
                         :key="internalLink.name"
@@ -51,15 +52,15 @@
                         <v-list-item-icon
                             v-if="internalLink.icon !== undefined"
                         >
-                            <v-icon>{{ internalLink.icon }}</v-icon>
+                            <v-icon small>{{ internalLink.icon }}</v-icon>
                         </v-list-item-icon>
                     </v-list-item>
                 </v-list-group>
             </v-list>
         </v-navigation-drawer>
         <v-container fluid>
-            <v-system-bar color="verde" dark class="mb-12">
-                <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
+            <v-system-bar color="white" class="mb-12">
+                <v-breadcrumbs large :items="breadcrumbs"></v-breadcrumbs>
             </v-system-bar>
             <!--        <v-divider class="mb-3 pt-1 verde" /> -->
             <router-view></router-view>
@@ -75,16 +76,34 @@ export default {
     data: () => ({
         items: [
             {
+                name: 'Paciente',
+                icon: 'mdi-account',
+                links: [
+                    {
+                        name: 'Buscar paciente',
+                        to: { name: 'FindPatient' },
+                        icon: 'mdi-account-search',
+                    },
+                    {
+                        name: 'Crear paciente',
+                        to: { name: 'CreatePatient' },
+                        icon: 'mdi-account-plus',
+                    },
+                ],
+            },
+            {
                 name: 'Configuración',
                 icon: 'mdi-cog',
                 links: [
                     {
                         name: 'Funcionarios',
                         to: { name: 'SettingEmployee' },
+                        icon: 'mdi-account-group',
                     },
                     {
                         name: 'Tipo reporte',
                         to: { name: 'SettingTypeReport' },
+                        icon: 'mdi-file-document-multiple',
                     },
                 ],
             },

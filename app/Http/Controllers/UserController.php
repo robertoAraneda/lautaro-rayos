@@ -63,7 +63,9 @@ class UserController extends Controller
                 return $this->response->noContent();
             }
 
-            $checkEmailUser = $this->userRepository->findByEmail($request->email);
+            $enail = \strtolower($request->email);
+
+            $checkEmailUser = $this->userRepository->findByEmail($enail);
 
             if ($checkEmailUser) {
                 if ($userModel->id != $checkEmailUser->id) {

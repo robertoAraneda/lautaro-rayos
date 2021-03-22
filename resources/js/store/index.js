@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import auth from './modules/auth';
 import user from './modules/user';
 import typeReport from './modules/typeReport';
+import patient from './modules/patient';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -11,6 +12,7 @@ export default new Vuex.Store({
         auth,
         user,
         typeReport,
+        patient,
     },
     state: {
         drawer: true,

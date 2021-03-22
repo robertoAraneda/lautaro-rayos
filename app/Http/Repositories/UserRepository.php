@@ -26,35 +26,36 @@ class UserRepository
         return User::where('rut', $rut)->first();
     }
 
-    public function update($userModel, $request)
+    public function update($model, $request)
     {
-        $userModel->rut = $request->rut;
-        $userModel->name = $request->name;
-        $userModel->lastname= $request->lastname;
-        $userModel->mother_lastname = $request->mother_lastname;
-        $userModel->phone = $request->phone;
-        $userModel->email = $request->email;
-        $userModel->password = bcrypt($request->password);
+        $model->rut = strtoupper($request->rut);
+        $model->name =strtoupper($request->name);
+        $model->lastname= strtoupper($request->lastname);
+        $model->mother_lastname = strtoupper($request->mother_lastname);
+        $model->phone = strtoupper($request->phone);
+        $model->email = strtolower($request->email);
+        $model->password = bcrypt($request->password);
 
-        $userModel->save();
+        $model->save();
 
-        return $userModel->fresh();
+        return $model->fresh();
     }
 
     public function store($request)
     {
         $userModel =  new User;
 
-        $userModel->rut = $request->rut;
-        $userModel->name = $request->name;
-        $userModel->lastname= $request->lastname;
-        $userModel->mother_lastname = $request->mother_lastname;
-        $userModel->phone = $request->phone;
-        $userModel->email = $request->email;
-        $userModel->password = bcrypt($request->password);
+        $model->rut = strtoupper($request->rut);
+        $model->name =strtoupper($request->name);
+        $model->lastname= strtoupper($request->lastname);
+        $model->mother_lastname = strtoupper($request->mother_lastname);
+        $model->phone = strtoupper($request->phone);
+        $model->email = strtolower($request->email);
+        $model->password = bcrypt($request->password);
 
-        $userModel->save();
 
-        return $userModel->fresh();
+        $model->save();
+
+        return $model->fresh();
     }
 }

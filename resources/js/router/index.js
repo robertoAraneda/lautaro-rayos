@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Login from '../pages/Login.vue';
 import Index from '../pages/laboratory/Index.vue';
 import { settings } from './settings';
+import { patient } from './patient';
 
 Vue.use(VueRouter);
 
@@ -17,7 +18,7 @@ const routes = [
         name: 'Laboratory',
         component: Index,
         meta: { requiresAuth: true },
-        children: [...settings],
+        children: [...settings, ...patient],
     },
 ];
 
