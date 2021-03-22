@@ -124,21 +124,19 @@ export default {
                 this.isLogin = true;
                 const { success, token } = await this.login(this.userEdited);
 
-                if (success) {
-                    const { success } = await this.attempt(token);
+                setTimeout(async () => {
                     if (success) {
-                        this.isLogin = false;
-                        console.log('entramos');
+                        const { success } = await this.attempt(token);
+                        if (success) {
+                            this.isLogin = false;
+                            this.$router.push({ name: 'laboratorio' });
+                        } else {
+                            this.isLogin = false;
+                        }
                     } else {
-                        this.dialogLogin = false;
-                        this.snackbar = true;
-                        this.message = 'Usuario/contraseña inválidos';
+                        this.isLogin = false;
                     }
-                } else {
-                    this.dialogLogin = false;
-                    this.snackbar = true;
-                    this.message = 'Usuario/contraseña inválidos';
-                }
+                }, 2000);
             }
         },
 

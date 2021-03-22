@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import es from 'vuetify/es5/locale/es';
 import App from './App.vue';
+import '@mdi/font/css/materialdesignicons.css';
 
 //support vuex
 import store from './store';
@@ -19,6 +20,8 @@ const toast = swal.mixin({
 });
 
 window.toast = toast;
+
+require('./services/subscriber');
 
 /**
  * The following block of code may be used to automatically register your
@@ -39,6 +42,8 @@ Vue.component('app', App);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+store.dispatch('auth/attempt', localStorage.getItem('access_token'));
+
 const app = new Vue({
     el: '#app',
     store,
@@ -47,6 +52,18 @@ const app = new Vue({
         lang: {
             locales: { es },
             current: 'es',
+        },
+        theme: {
+            themes: {
+                light: {
+                    burdeo: '#731739', //'#027087'
+                    celeste: '#77ABD9',
+                    verde: '#1B8CA6',
+                },
+            },
+        },
+        icons: {
+            iconfont: 'mdi', // default - only for display purposes
         },
     }),
 });

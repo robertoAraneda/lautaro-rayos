@@ -1,21 +1,23 @@
-export default class User {
+export default class Patient {
     constructor(
         id = '',
         rut = '',
-        name = '',
+        bdup = '',
+        names = '',
         lastname = '',
         motherLastname = '',
-        phone = '',
+        birthDate = '',
         email = '',
-        password = ''
+        phone = ''
     ) {
         this.id = id;
         this.rut = rut;
-        this.name = name;
+        this.bdup = bdup;
+        this.names = names;
         this.lastname = lastname;
-        this.phone = phone;
         this.motherLastname = motherLastname;
+        this.birthDate = birthDate;
         this.email = email;
-        this.password = password;
+        this.phone = phone;
     }
 }
