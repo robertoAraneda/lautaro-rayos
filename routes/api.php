@@ -17,6 +17,8 @@ Route::group([
   'prefix' => 'auth'
 ], function () {
     Route::post('login', [App\Http\Controllers\AuthController::class, 'login']);
+    Route::post('create-admin', [App\Http\Controllers\AuthController::class, 'createAdmin']);
+
 
     Route::group([
     'middleware' => 'auth:api'
@@ -50,4 +52,9 @@ Route::group([
     Route::get('/patients/find/rut/{rut}', [App\Http\Controllers\PatientController::class, 'findByRut']);
     Route::get('/patients/find/bdup/{bdup}', [App\Http\Controllers\PatientController::class, 'findByBdup']);
     Route::post('/patients/find/demographics', [App\Http\Controllers\PatientController::class, 'findPatientByDemographics']);
+
+
+    //uploadFiles
+    Route::post('/reports/upload', [App\Http\Controllers\PatientReportController::class, 'uploadFileReport']);
+    Route::post('/reports/delete', [App\Http\Controllers\PatientReportController::class, 'removeFileReport']);
 });

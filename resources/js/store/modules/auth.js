@@ -1,4 +1,5 @@
 const BASE_URL = '/api/auth';
+import headers from '../../services/fetch';
 
 export default {
     namespaced: true,
@@ -97,6 +98,35 @@ export default {
             } catch (error) {
                 console.log(error);
                 return { success: false };
+            }
+        },
+        createAdminUser: async (_, user) => {
+            try {
+                var raw = JSON.stringify({
+                    rut: user.rut,
+                    name: user.name,
+                    password: user.password,
+                });
+
+                const response = await fetch(`/api/auth/create-admin`, {
+                    method: 'POST',
+                    headers,
+                    body: raw,
+                });
+
+                const { success, statusCode, message } = await response.json();
+
+                if (statusCode === 201) {
+                    return { success, message };
+                } else if (statusCode === 406) {
+                    return {
+                        success: false,
+                        message: { email: 'El email ya existe' },
+                    };
+                }
+            } catch (error) {
+                console.log(error);
+                return { success: false, message: error.message };
             }
         },
     },

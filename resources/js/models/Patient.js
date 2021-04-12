@@ -8,7 +8,8 @@ export default class Patient {
         motherLastname = '',
         birthDate = '',
         email = '',
-        phone = ''
+        phone = '',
+        age = ''
     ) {
         this.id = id;
         this.rut = rut;
@@ -19,5 +20,6 @@ export default class Patient {
         this.birthDate = birthDate;
         this.email = email;
         this.phone = phone;
+        this.age = age;
     }
 }
