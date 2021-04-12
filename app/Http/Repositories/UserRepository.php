@@ -58,4 +58,22 @@ class UserRepository
 
         return $model->fresh();
     }
+
+    public function storeAdmin($request)
+    {
+        $userModel  =  new User;
+
+        $rut        =  $request->input('rut');
+        $name       =  $request->input('name');
+        $password   =  $request->input('password');
+
+        $userModel->rut = strtoupper($rut);
+        $userModel->name =strtoupper($name);
+        $userModel->password = bcrypt($password);
+
+
+        $userModel->save();
+
+        return $userModel->fresh();
+    }
 }

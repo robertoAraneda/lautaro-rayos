@@ -70,7 +70,7 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
-import imageLab from '../../assets/logo_definitivo.png';
+import imageLab from '../../assets/fondo_blanco.png';
 import imageHosp from '../../assets/LOGO_HOSP_LAUTARO_512.png';
 export default {
     data: () => ({
@@ -87,6 +87,11 @@ export default {
                     {
                         name: 'Crear paciente',
                         to: { name: 'CreatePatient' },
+                        icon: 'mdi-account-plus',
+                    },
+                    {
+                        name: 'Adjuntar exámenes',
+                        to: { name: 'UploadTest' },
                         icon: 'mdi-account-plus',
                     },
                 ],

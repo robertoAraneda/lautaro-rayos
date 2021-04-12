@@ -14,6 +14,11 @@ class PatientObject extends JsonResource
      */
     public function toArray($request)
     {
+        if(isset($this->birthdate)){
+           $interval = date_diff(date_create(), date_create($this->birthdate));  
+        }
+       
+
         return [
             'id'                => $this->id,
             'rut'               => $this->rut,
@@ -23,7 +28,8 @@ class PatientObject extends JsonResource
             'motherLastname'    => $this->mother_lastname,
             'birthDate'         => $this->birthdate,
             'phone'             => $this->phone,
-            'email'             => $this->email
+            'email'             => $this->email,
+            'age'               => isset($this->birthdate) ? intval($interval->format('%Y')): -1,
         ];
     }
 }

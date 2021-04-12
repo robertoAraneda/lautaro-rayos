@@ -15,8 +15,7 @@
                 class="burdeo--text"
             ></v-app-bar-nav-icon>
             <v-toolbar-title class="burdeo--text"
-                >Laboratorio clínico - Hospital Dr. Abraham Godoy
-                Peña</v-toolbar-title
+                >Imagenología - Hospital Dr. Abraham Godoy Peña</v-toolbar-title
             >
             <v-spacer></v-spacer>
             <v-btn

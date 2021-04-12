@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Login from '../pages/Login.vue';
+import FirstLogin from '../pages/FirstLogin.vue';
 import Index from '../pages/laboratory/Index.vue';
 import { settings } from './settings';
 import { patient } from './patient';
@@ -12,6 +13,11 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: Login,
+    },
+    {
+        path: '/first-login',
+        name: 'FirstLogin',
+        component: FirstLogin,
     },
     {
         path: '/laboratorio',

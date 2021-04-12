@@ -75,6 +75,21 @@ class AuthController extends Controller
         }
     }
 
+    public function createAdmin(Request $request)
+    {
+        try {
+            if (!request()->isJson()) {
+                return $this->response->unauthorized();
+            }
+
+            $user = $this->userRepository->storeAdmin(request());
+
+            return $this->response->created(new UserObject($user));
+        } catch (\Exception $ex) {
+            return $this->response->internalServerError($ex);
+        }
+    }
+
     /**
      * Login user and create token
      *

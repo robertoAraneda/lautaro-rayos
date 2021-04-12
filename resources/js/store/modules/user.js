@@ -150,6 +150,7 @@ export default {
                 return { success: false, message: error.message };
             }
         },
+
         changePasswordIsFirstLogin: async (_, { user, token }) => {
             try {
                 const URL = `${BASE_URL}/${user.id}`;
