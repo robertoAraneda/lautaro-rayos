@@ -66,7 +66,7 @@ export default {
             console.log('this.editedItem', this.editedItem);
 
             if (success) {
-                this.$router.push({ name: 'login' });
+                this.$router.push({ name: 'Login' });
             }
         },
         ...mapActions({
