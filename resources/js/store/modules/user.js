@@ -147,6 +147,7 @@ export default {
                     email: user.email,
                     password: user.possword,
                     phone: user.phone,
+                    role_id: user.role.id,
                 });
 
                 const response = await fetch(`/api/v1/users/${user.id}`, {

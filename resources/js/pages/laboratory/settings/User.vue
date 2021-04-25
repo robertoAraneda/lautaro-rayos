@@ -111,6 +111,7 @@
                                         label="Rol"
                                         dense
                                         outlined
+                                        return-object
                                     >
                                         <template
                                             v-slot:selection="{ item, index }"

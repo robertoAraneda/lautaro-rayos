@@ -3,10 +3,15 @@
         <!--  <v-navigation-drawer app> </v-navigation-drawer>
  -->
         <v-app-bar v-if="!authenticated" absolute color="white" app>
-            <v-toolbar-title>Title</v-toolbar-title>
+            <v-toolbar-title class="burdeo--text"
+                >Hospital Dr. Abraham Godoy Peña</v-toolbar-title
+            >
 
             <v-spacer></v-spacer>
-            <v-btn @click="test">Login</v-btn>
+            <v-btn class="mr-2" color="burdeo" dark @click="principal"
+                >Página principal</v-btn
+            >
+            <v-btn color="burdeo" dark @click="test">Login</v-btn>
         </v-app-bar>
         <v-app-bar v-else absolute color="grey lighten-5" app>
             <v-app-bar-nav-icon
@@ -26,7 +31,14 @@
                 @click="laboratory"
                 >Imagenología</v-btn
             >
-            <v-btn class="ml-2" fab dark color="burdeo" small>
+            <v-btn
+                @click="handleLogout"
+                class="ml-2"
+                fab
+                dark
+                color="burdeo"
+                small
+            >
                 <v-icon dark>
                     mdi-power
                 </v-icon>
@@ -42,14 +54,17 @@
             </v-container>
         </v-main>
 
-        <v-footer app>
-            foot
+        <v-footer color="burdeo" dark app class="d-flex">
+            <div class="ml-auto">
+                www.apoyodiagnostico.cl - {{ new Date().getFullYear() }}
+                <v-icon>mdi-trademark</v-icon>
+            </div>
         </v-footer>
     </v-app>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
     props: {
         privileges: Object,
@@ -80,14 +95,27 @@ export default {
     },
 
     methods: {
+        ...mapActions({
+            logout: 'auth/logout',
+        }),
         test() {
             this.$router.push({ name: 'Login' });
+        },
+        principal() {
+            this.$router.push('/');
         },
         setDrawer() {
             this.drawer = !this.drawer;
         },
         laboratory() {
             this.$router.push({ name: 'Laboratory' });
+        },
+        async handleLogout() {
+            const { success } = await this.logout();
+
+            if (success) {
+                this.$router.push({ name: 'Login' });
+            }
         },
     },
 };
