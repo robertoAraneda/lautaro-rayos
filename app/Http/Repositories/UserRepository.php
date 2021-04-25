@@ -3,6 +3,7 @@
 namespace App\Http\Repositories;
 
 use App\Models\User;
+use App\Models\Role;
 
 class UserRepository
 {
@@ -11,6 +12,10 @@ class UserRepository
         return User::orderBy('id')->get();
     }
 
+    public function allRoles()
+    {
+        return Role::orderBy('id')->get();
+    }
     public function findById($id)
     {
         return User::find($id);
@@ -35,6 +40,7 @@ class UserRepository
         $model->phone = strtoupper($request->phone);
         $model->email = strtolower($request->email);
         $model->password = bcrypt($request->password);
+        $model->role_id = $request->role_id;
 
         $model->save();
 
@@ -52,6 +58,7 @@ class UserRepository
         $model->phone = strtoupper($request->phone);
         $model->email = strtolower($request->email);
         $model->password = bcrypt($request->password);
+        $model->role_id = $request->role_id;
 
 
         $model->save();
@@ -66,10 +73,14 @@ class UserRepository
         $rut        =  $request->input('rut');
         $name       =  $request->input('name');
         $password   =  $request->input('password');
+        $role       =  $request->input('role_id');
+
 
         $userModel->rut = strtoupper($rut);
         $userModel->name =strtoupper($name);
         $userModel->password = bcrypt($password);
+        $userModel->role_id = $role;
+
 
 
         $userModel->save();

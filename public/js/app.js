@@ -1398,9 +1398,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       search: '',
       headers: [{
-        text: '#',
-        value: 'id'
-      }, {
         text: 'rut',
         value: 'rut'
       }, {
@@ -1418,6 +1415,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         text: 'Correo electrónico',
         value: 'email'
+      }, {
+        text: 'Rol',
+        value: 'role.description'
       }, {
         text: 'Acciones',
         value: 'actions',
@@ -1933,6 +1933,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       items: [{
         name: 'Paciente',
         icon: 'mdi-account',
+        permission: ['Administrador', 'Médico', 'Administrativo'],
         links: [{
           name: 'Buscar paciente',
           to: {
@@ -1958,6 +1959,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         name: 'Configuración',
         icon: 'mdi-cog',
+        permission: ['Administrador'],
         links: [{
           name: 'Funcionarios',
           to: {
@@ -1986,7 +1988,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)(['drawer'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
-    user: 'auth/user'
+    user: 'auth/user',
+    role: 'auth/role'
   })), {}, {
     breadcrumbs: function breadcrumbs() {
       var _this = this;
@@ -2017,6 +2020,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   methods: {
+    getPrivilegesMainLinks: function getPrivilegesMainLinks() {
+      var _this2 = this;
+
+      return this.items.filter(function (link) {
+        return link.permission.includes(_this2.role.description);
+      });
+    },
+    getPrivilegesSettingLinks: function getPrivilegesSettingLinks(index) {
+      var _this3 = this;
+
+      return this.items[index].links.filter(function (link) {
+        return link.permission.includes(_this3.role.description);
+      });
+    },
     capitalizeFirstLetter: function capitalizeFirstLetter(string) {
       if (string.includes('-')) {
         string = string.replace('-', ' ');
@@ -2036,6 +2053,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (string.search('cióna')) {
         string = string.replace('cióna', 'ciona');
+      }
+
+      if (string.search('mod')) {
+        string = string.replace('mód', 'mod');
       }
 
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -3363,6 +3384,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3381,12 +3427,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     this.getUsers();
+    this.getRoles();
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
-    users: 'user/users'
+    users: 'user/users',
+    roles: 'user/roles'
   })),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)({
     getUsers: 'user/fetchUsers',
+    getRoles: 'user/fetchRoles',
     storeUser: 'user/postUser',
     updateUser: 'user/putUser',
     destroyUser: 'user/deleteUser'
@@ -4165,7 +4214,8 @@ var BASE_URL = '/api/auth';
                 raw = JSON.stringify({
                   rut: user.rut,
                   name: user.name,
-                  password: user.password
+                  password: user.password,
+                  role_id: 1
                 });
                 _context4.next = 4;
                 return fetch("/api/auth/create-admin", {
@@ -5925,11 +5975,15 @@ var BASE_URL = '/api/v1/users';
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,
   state: {
-    users: []
+    users: [],
+    roles: []
   },
   mutations: {
     SET_USERS: function SET_USERS(state, users) {
       state.users = users;
+    },
+    SET_ROLES: function SET_ROLES(state, payload) {
+      state.roles = payload;
     },
     SET_USER: function SET_USER(state, user) {
       state.users.push(user);
@@ -5950,6 +6004,9 @@ var BASE_URL = '/api/v1/users';
   getters: {
     users: function users(state) {
       return state.users;
+    },
+    roles: function roles(state) {
+      return state.roles;
     }
   },
   actions: {
@@ -6010,9 +6067,9 @@ var BASE_URL = '/api/v1/users';
 
       return fetchUsers;
     }(),
-    postUser: function () {
-      var _postUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(_ref2, user) {
-        var commit, raw, response, _yield$response$json2, success, statusCode, data, message;
+    fetchRoles: function () {
+      var _fetchRoles = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(_ref2, payload) {
+        var commit, response, _yield$response$json2, success, data, message;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
@@ -6020,88 +6077,56 @@ var BASE_URL = '/api/v1/users';
               case 0:
                 commit = _ref2.commit;
                 _context2.prev = 1;
-                raw = JSON.stringify({
-                  rut: user.rut,
-                  name: user.name,
-                  lastname: user.lastname,
-                  mother_lastname: user.motherLastname,
-                  email: user.email,
-                  password: user.possword,
-                  phone: user.phone
-                });
-                _context2.next = 5;
-                return fetch("/api/v1/signup", {
-                  method: 'POST',
-                  headers: _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default,
-                  body: raw
+                _context2.next = 4;
+                return fetch("/api/v1/roles", {
+                  method: 'GET',
+                  headers: _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default
                 });
 
-              case 5:
+              case 4:
                 response = _context2.sent;
-                _context2.next = 8;
+                _context2.next = 7;
                 return response.json();
 
-              case 8:
+              case 7:
                 _yield$response$json2 = _context2.sent;
                 success = _yield$response$json2.success;
-                statusCode = _yield$response$json2.statusCode;
                 data = _yield$response$json2.data;
                 message = _yield$response$json2.message;
 
-                if (!(statusCode === 201)) {
-                  _context2.next = 18;
-                  break;
+                if (success) {
+                  commit('SET_ROLES', data.array);
+                } else {
+                  console.log(error);
                 }
 
-                commit('SET_USER', data);
                 return _context2.abrupt("return", {
                   success: success,
                   message: message
                 });
 
-              case 18:
-                if (!(statusCode === 406)) {
-                  _context2.next = 20;
-                  break;
-                }
-
-                return _context2.abrupt("return", {
-                  success: false,
-                  message: {
-                    email: 'El email ya existe'
-                  }
-                });
-
-              case 20:
-                _context2.next = 26;
-                break;
-
-              case 22:
-                _context2.prev = 22;
+              case 15:
+                _context2.prev = 15;
                 _context2.t0 = _context2["catch"](1);
                 console.log(_context2.t0);
-                return _context2.abrupt("return", {
-                  success: false,
-                  message: _context2.t0.message
-                });
 
-              case 26:
+              case 18:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[1, 22]]);
+        }, _callee2, null, [[1, 15]]);
       }));
 
-      function postUser(_x2, _x3) {
-        return _postUser.apply(this, arguments);
+      function fetchRoles(_x2, _x3) {
+        return _fetchRoles.apply(this, arguments);
       }
 
-      return postUser;
+      return fetchRoles;
     }(),
-    deleteUser: function () {
-      var _deleteUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(_ref3, user) {
-        var commit, response, _yield$response$json3, success, message;
+    postUser: function () {
+      var _postUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(_ref3, user) {
+        var commit, raw, response, _yield$response$json3, success, statusCode, data, message;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
@@ -6109,33 +6134,65 @@ var BASE_URL = '/api/v1/users';
               case 0:
                 commit = _ref3.commit;
                 _context3.prev = 1;
-                _context3.next = 4;
-                return fetch("/api/v1/users/".concat(user.id), {
-                  method: 'DELETE',
-                  headers: _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default
+                raw = JSON.stringify({
+                  rut: user.rut,
+                  name: user.name,
+                  lastname: user.lastname,
+                  mother_lastname: user.motherLastname,
+                  email: user.email,
+                  password: user.possword,
+                  phone: user.phone,
+                  role_id: user.role.id
+                });
+                _context3.next = 5;
+                return fetch("/api/v1/signup", {
+                  method: 'POST',
+                  headers: _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default,
+                  body: raw
                 });
 
-              case 4:
+              case 5:
                 response = _context3.sent;
-                _context3.next = 7;
+                _context3.next = 8;
                 return response.json();
 
-              case 7:
+              case 8:
                 _yield$response$json3 = _context3.sent;
                 success = _yield$response$json3.success;
+                statusCode = _yield$response$json3.statusCode;
+                data = _yield$response$json3.data;
                 message = _yield$response$json3.message;
 
-                if (success) {
-                  commit('DELETE_USER', user);
+                if (!(statusCode === 201)) {
+                  _context3.next = 18;
+                  break;
                 }
 
+                commit('SET_USER', data);
                 return _context3.abrupt("return", {
                   success: success,
                   message: message
                 });
 
-              case 14:
-                _context3.prev = 14;
+              case 18:
+                if (!(statusCode === 406)) {
+                  _context3.next = 20;
+                  break;
+                }
+
+                return _context3.abrupt("return", {
+                  success: false,
+                  message: {
+                    email: 'El email ya existe'
+                  }
+                });
+
+              case 20:
+                _context3.next = 26;
+                break;
+
+              case 22:
+                _context3.prev = 22;
                 _context3.t0 = _context3["catch"](1);
                 console.log(_context3.t0);
                 return _context3.abrupt("return", {
@@ -6143,23 +6200,23 @@ var BASE_URL = '/api/v1/users';
                   message: _context3.t0.message
                 });
 
-              case 18:
+              case 26:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[1, 14]]);
+        }, _callee3, null, [[1, 22]]);
       }));
 
-      function deleteUser(_x4, _x5) {
-        return _deleteUser.apply(this, arguments);
+      function postUser(_x4, _x5) {
+        return _postUser.apply(this, arguments);
       }
 
-      return deleteUser;
+      return postUser;
     }(),
-    putUser: function () {
-      var _putUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(_ref4, user) {
-        var commit, raw, response, _yield$response$json4, success, statusCode, data, message;
+    deleteUser: function () {
+      var _deleteUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(_ref4, user) {
+        var commit, response, _yield$response$json4, success, message;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
@@ -6167,6 +6224,64 @@ var BASE_URL = '/api/v1/users';
               case 0:
                 commit = _ref4.commit;
                 _context4.prev = 1;
+                _context4.next = 4;
+                return fetch("/api/v1/users/".concat(user.id), {
+                  method: 'DELETE',
+                  headers: _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default
+                });
+
+              case 4:
+                response = _context4.sent;
+                _context4.next = 7;
+                return response.json();
+
+              case 7:
+                _yield$response$json4 = _context4.sent;
+                success = _yield$response$json4.success;
+                message = _yield$response$json4.message;
+
+                if (success) {
+                  commit('DELETE_USER', user);
+                }
+
+                return _context4.abrupt("return", {
+                  success: success,
+                  message: message
+                });
+
+              case 14:
+                _context4.prev = 14;
+                _context4.t0 = _context4["catch"](1);
+                console.log(_context4.t0);
+                return _context4.abrupt("return", {
+                  success: false,
+                  message: _context4.t0.message
+                });
+
+              case 18:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[1, 14]]);
+      }));
+
+      function deleteUser(_x6, _x7) {
+        return _deleteUser.apply(this, arguments);
+      }
+
+      return deleteUser;
+    }(),
+    putUser: function () {
+      var _putUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(_ref5, user) {
+        var commit, raw, response, _yield$response$json5, success, statusCode, data, message;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                commit = _ref5.commit;
+                _context5.prev = 1;
                 raw = JSON.stringify({
                   rut: user.rut,
                   name: user.name,
@@ -6176,7 +6291,7 @@ var BASE_URL = '/api/v1/users';
                   password: user.possword,
                   phone: user.phone
                 });
-                _context4.next = 5;
+                _context5.next = 5;
                 return fetch("/api/v1/users/".concat(user.id), {
                   method: 'PUT',
                   headers: _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default,
@@ -6184,35 +6299,35 @@ var BASE_URL = '/api/v1/users';
                 });
 
               case 5:
-                response = _context4.sent;
-                _context4.next = 8;
+                response = _context5.sent;
+                _context5.next = 8;
                 return response.json();
 
               case 8:
-                _yield$response$json4 = _context4.sent;
-                success = _yield$response$json4.success;
-                statusCode = _yield$response$json4.statusCode;
-                data = _yield$response$json4.data;
-                message = _yield$response$json4.message;
+                _yield$response$json5 = _context5.sent;
+                success = _yield$response$json5.success;
+                statusCode = _yield$response$json5.statusCode;
+                data = _yield$response$json5.data;
+                message = _yield$response$json5.message;
 
                 if (!(statusCode === 200)) {
-                  _context4.next = 18;
+                  _context5.next = 18;
                   break;
                 }
 
                 commit('PUT_USER', data);
-                return _context4.abrupt("return", {
+                return _context5.abrupt("return", {
                   success: success,
                   message: message
                 });
 
               case 18:
                 if (!(statusCode === 406)) {
-                  _context4.next = 20;
+                  _context5.next = 20;
                   break;
                 }
 
-                return _context4.abrupt("return", {
+                return _context5.abrupt("return", {
                   success: false,
                   message: {
                     email: 'El email ya existe'
@@ -6220,58 +6335,11 @@ var BASE_URL = '/api/v1/users';
                 });
 
               case 20:
-                _context4.next = 26;
+                _context5.next = 26;
                 break;
 
               case 22:
-                _context4.prev = 22;
-                _context4.t0 = _context4["catch"](1);
-                console.log(_context4.t0);
-                return _context4.abrupt("return", {
-                  success: false,
-                  message: _context4.t0.message
-                });
-
-              case 26:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, null, [[1, 22]]);
-      }));
-
-      function putUser(_x6, _x7) {
-        return _putUser.apply(this, arguments);
-      }
-
-      return putUser;
-    }(),
-    changePasswordIsFirstLogin: function () {
-      var _changePasswordIsFirstLogin = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(_, _ref5) {
-        var user, token, URL, _yield$axios$put, data, success, message;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                user = _ref5.user, token = _ref5.token;
-                _context5.prev = 1;
-                URL = "".concat(BASE_URL, "/").concat(user.id);
-                axios.defaults.headers.common['Authorization'] = "Bearer ".concat(token);
-                _context5.next = 6;
-                return axios.put(URL, user);
-
-              case 6:
-                _yield$axios$put = _context5.sent;
-                data = _yield$axios$put.data;
-                success = data.success, message = data.message;
-                return _context5.abrupt("return", {
-                  success: success,
-                  message: message
-                });
-
-              case 12:
-                _context5.prev = 12;
+                _context5.prev = 22;
                 _context5.t0 = _context5["catch"](1);
                 console.log(_context5.t0);
                 return _context5.abrupt("return", {
@@ -6279,15 +6347,62 @@ var BASE_URL = '/api/v1/users';
                   message: _context5.t0.message
                 });
 
-              case 16:
+              case 26:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[1, 12]]);
+        }, _callee5, null, [[1, 22]]);
       }));
 
-      function changePasswordIsFirstLogin(_x8, _x9) {
+      function putUser(_x8, _x9) {
+        return _putUser.apply(this, arguments);
+      }
+
+      return putUser;
+    }(),
+    changePasswordIsFirstLogin: function () {
+      var _changePasswordIsFirstLogin = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(_, _ref6) {
+        var user, token, URL, _yield$axios$put, data, success, message;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                user = _ref6.user, token = _ref6.token;
+                _context6.prev = 1;
+                URL = "".concat(BASE_URL, "/").concat(user.id);
+                axios.defaults.headers.common['Authorization'] = "Bearer ".concat(token);
+                _context6.next = 6;
+                return axios.put(URL, user);
+
+              case 6:
+                _yield$axios$put = _context6.sent;
+                data = _yield$axios$put.data;
+                success = data.success, message = data.message;
+                return _context6.abrupt("return", {
+                  success: success,
+                  message: message
+                });
+
+              case 12:
+                _context6.prev = 12;
+                _context6.t0 = _context6["catch"](1);
+                console.log(_context6.t0);
+                return _context6.abrupt("return", {
+                  success: false,
+                  message: _context6.t0.message
+                });
+
+              case 16:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, null, [[1, 12]]);
+      }));
+
+      function changePasswordIsFirstLogin(_x10, _x11) {
         return _changePasswordIsFirstLogin.apply(this, arguments);
       }
 
@@ -36592,88 +36707,94 @@ var render = function() {
           _vm._v(" "),
           _c("v-divider", { staticClass: "white pt-1" }),
           _vm._v(" "),
-          _c(
-            "v-list",
-            { attrs: { dense: "", nav: "", shaped: "", dark: "" } },
-            _vm._l(_vm.items, function(link, index) {
-              return _c(
-                "v-list-group",
-                {
-                  key: index,
-                  attrs: {
-                    "no-action": "",
-                    "prepend-icon": link.icon,
-                    color: "white"
-                  },
-                  scopedSlots: _vm._u(
+          _vm.role
+            ? _c(
+                "v-list",
+                { attrs: { dense: "", nav: "", shaped: "", dark: "" } },
+                _vm._l(_vm.getPrivilegesMainLinks(), function(link, index) {
+                  return _c(
+                    "v-list-group",
+                    {
+                      key: index,
+                      attrs: {
+                        "no-action": "",
+                        "prepend-icon": link.icon,
+                        color: "white"
+                      },
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "activator",
+                            fn: function() {
+                              return [
+                                _c(
+                                  "v-list-item",
+                                  [
+                                    _c(
+                                      "v-list-item-title",
+                                      { staticClass: "body-2" },
+                                      [_vm._v(_vm._s(link.name))]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]
+                            },
+                            proxy: true
+                          }
+                        ],
+                        null,
+                        true
+                      )
+                    },
                     [
-                      {
-                        key: "activator",
-                        fn: function() {
-                          return [
+                      _vm._v(" "),
+                      _c("v-divider"),
+                      _vm._v(" "),
+                      _vm._l(_vm.getPrivilegesSettingLinks(index), function(
+                        internalLink
+                      ) {
+                        return _c(
+                          "v-list-item",
+                          {
+                            key: internalLink.name,
+                            attrs: { to: internalLink.to, link: "" }
+                          },
+                          [
                             _c(
-                              "v-list-item",
+                              "v-list-item-content",
                               [
                                 _c(
                                   "v-list-item-title",
                                   { staticClass: "body-2" },
-                                  [_vm._v(_vm._s(link.name))]
+                                  [_vm._v(_vm._s(internalLink.name))]
                                 )
                               ],
                               1
-                            )
-                          ]
-                        },
-                        proxy: true
-                      }
-                    ],
-                    null,
-                    true
-                  )
-                },
-                [
-                  _vm._v(" "),
-                  _c("v-divider"),
-                  _vm._v(" "),
-                  _vm._l(link.links, function(internalLink) {
-                    return _c(
-                      "v-list-item",
-                      {
-                        key: internalLink.name,
-                        attrs: { to: internalLink.to, link: "" }
-                      },
-                      [
-                        _c(
-                          "v-list-item-content",
-                          [
-                            _c("v-list-item-title", { staticClass: "body-2" }, [
-                              _vm._v(_vm._s(internalLink.name))
-                            ])
+                            ),
+                            _vm._v(" "),
+                            internalLink.icon !== undefined
+                              ? _c(
+                                  "v-list-item-icon",
+                                  [
+                                    _c("v-icon", { attrs: { small: "" } }, [
+                                      _vm._v(_vm._s(internalLink.icon))
+                                    ])
+                                  ],
+                                  1
+                                )
+                              : _vm._e()
                           ],
                           1
-                        ),
-                        _vm._v(" "),
-                        internalLink.icon !== undefined
-                          ? _c(
-                              "v-list-item-icon",
-                              [
-                                _c("v-icon", { attrs: { small: "" } }, [
-                                  _vm._v(_vm._s(internalLink.icon))
-                                ])
-                              ],
-                              1
-                            )
-                          : _vm._e()
-                      ],
-                      1
-                    )
-                  })
-                ],
-                2
+                        )
+                      })
+                    ],
+                    2
+                  )
+                }),
+                1
               )
-            }),
-            1
-          )
+            : _vm._e()
         ],
         1
       ),
@@ -38502,6 +38623,73 @@ var render = function() {
                                           )
                                         },
                                         expression: "editedItem.password"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-col",
+                                  {
+                                    attrs: {
+                                      cols: "12",
+                                      sm: "6",
+                                      md: "6",
+                                      xl: "4"
+                                    }
+                                  },
+                                  [
+                                    _c("v-select", {
+                                      attrs: {
+                                        items: _vm.roles,
+                                        "item-text": "description",
+                                        "item-value": "id",
+                                        label: "Rol",
+                                        dense: "",
+                                        outlined: ""
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "selection",
+                                            fn: function(ref) {
+                                              var item = ref.item
+                                              var index = ref.index
+                                              return [
+                                                index === 0
+                                                  ? _c(
+                                                      "v-chip",
+                                                      {
+                                                        attrs: {
+                                                          color: "burdeo",
+                                                          dark: ""
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("span", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              item.description
+                                                            )
+                                                          )
+                                                        ])
+                                                      ]
+                                                    )
+                                                  : _vm._e()
+                                              ]
+                                            }
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                      model: {
+                                        value: _vm.editedItem.role,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.editedItem, "role", $$v)
+                                        },
+                                        expression: "editedItem.role"
                                       }
                                     })
                                   ],

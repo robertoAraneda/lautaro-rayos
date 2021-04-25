@@ -38,6 +38,7 @@ Route::group([
     Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
     Route::put('/users/{id}', [App\Http\Controllers\UserController::class, 'update']);
     Route::delete('/users/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
+    Route::get('/roles', [App\Http\Controllers\UserController::class, 'roles']);
 
     //tipos de reporte
     Route::post('/type-reports', [App\Http\Controllers\TypeReportController::class, 'store']);

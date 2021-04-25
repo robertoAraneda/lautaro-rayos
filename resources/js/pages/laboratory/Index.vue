@@ -22,9 +22,9 @@
 
             <v-divider class="white pt-1"></v-divider>
 
-            <v-list dense nav shaped dark>
+            <v-list dense nav shaped dark v-if="role">
                 <v-list-group
-                    v-for="(link, index) in items"
+                    v-for="(link, index) in getPrivilegesMainLinks()"
                     :key="index"
                     no-action
                     :prepend-icon="link.icon"
@@ -39,7 +39,7 @@
                     </template>
                     <v-divider />
                     <v-list-item
-                        v-for="internalLink in link.links"
+                        v-for="internalLink in getPrivilegesSettingLinks(index)"
                         :key="internalLink.name"
                         :to="internalLink.to"
                         link
@@ -78,6 +78,7 @@ export default {
             {
                 name: 'Paciente',
                 icon: 'mdi-account',
+                permission: ['Administrador', 'Médico', 'Administrativo'],
                 links: [
                     {
                         name: 'Buscar paciente',
@@ -106,6 +107,7 @@ export default {
             {
                 name: 'Configuración',
                 icon: 'mdi-cog',
+                permission: ['Administrador'],
                 links: [
                     {
                         name: 'Funcionarios',
@@ -135,6 +137,7 @@ export default {
         ...mapState(['drawer']),
         ...mapGetters({
             user: 'auth/user',
+            role: 'auth/role',
         }),
         breadcrumbs() {
             const routes = this.$route.path;
@@ -160,6 +163,16 @@ export default {
         },
     },
     methods: {
+        getPrivilegesMainLinks() {
+            return this.items.filter(link =>
+                link.permission.includes(this.role.description)
+            );
+        },
+        getPrivilegesSettingLinks(index) {
+            return this.items[index].links.filter(link =>
+                link.permission.includes(this.role.description)
+            );
+        },
         capitalizeFirstLetter(string) {
             if (string.includes('-')) {
                 string = string.replace('-', ' ');
@@ -177,6 +190,9 @@ export default {
             }
             if (string.search('cióna')) {
                 string = string.replace('cióna', 'ciona');
+            }
+            if (string.search('mod')) {
+                string = string.replace('mód', 'mod');
             }
             return string.charAt(0).toUpperCase() + string.slice(1);
         },

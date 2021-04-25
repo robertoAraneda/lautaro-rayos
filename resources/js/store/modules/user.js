@@ -6,10 +6,14 @@ export default {
     namespaced: true,
     state: {
         users: [],
+        roles: [],
     },
     mutations: {
         SET_USERS: (state, users) => {
             state.users = users;
+        },
+        SET_ROLES: (state, payload) => {
+            state.roles = payload;
         },
         SET_USER: (state, user) => {
             state.users.push(user);
@@ -32,6 +36,7 @@ export default {
         users: state => {
             return state.users;
         },
+        roles: state => state.roles,
     },
     actions: {
         fetchUsers: async ({ commit }) => {
@@ -54,6 +59,26 @@ export default {
                 console.log(error);
             }
         },
+        fetchRoles: async ({ commit }, payload) => {
+            try {
+                const response = await fetch(`/api/v1/roles`, {
+                    method: 'GET',
+                    headers,
+                });
+
+                const { success, data, message } = await response.json();
+
+                if (success) {
+                    commit('SET_ROLES', data.array);
+                } else {
+                    console.log(error);
+                }
+
+                return { success, message };
+            } catch (error) {
+                console.log(error);
+            }
+        },
         postUser: async ({ commit }, user) => {
             try {
                 var raw = JSON.stringify({
@@ -64,6 +89,7 @@ export default {
                     email: user.email,
                     password: user.possword,
                     phone: user.phone,
+                    role_id: user.role.id,
                 });
 
                 const response = await fetch(`/api/v1/signup`, {
