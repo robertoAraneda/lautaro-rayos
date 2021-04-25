@@ -102,6 +102,31 @@
                                         v-model="editedItem.password"
                                     ></v-text-field>
                                 </v-col>
+                                <v-col cols="12" sm="6" md="6" xl="4">
+                                    <v-select
+                                        v-model="editedItem.role"
+                                        :items="roles"
+                                        item-text="description"
+                                        item-value="id"
+                                        label="Rol"
+                                        dense
+                                        outlined
+                                    >
+                                        <template
+                                            v-slot:selection="{ item, index }"
+                                        >
+                                            <v-chip
+                                                color="burdeo"
+                                                dark
+                                                v-if="index === 0"
+                                            >
+                                                <span>{{
+                                                    item.description
+                                                }}</span>
+                                            </v-chip>
+                                        </template>
+                                    </v-select>
+                                </v-col>
                             </v-row>
                         </v-container>
                     </v-card-text>
@@ -164,15 +189,18 @@ export default {
     }),
     mounted() {
         this.getUsers();
+        this.getRoles();
     },
     computed: {
         ...mapGetters({
             users: 'user/users',
+            roles: 'user/roles',
         }),
     },
     methods: {
         ...mapActions({
             getUsers: 'user/fetchUsers',
+            getRoles: 'user/fetchRoles',
             storeUser: 'user/postUser',
             updateUser: 'user/putUser',
             destroyUser: 'user/deleteUser',

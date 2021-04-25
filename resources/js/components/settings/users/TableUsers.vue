@@ -73,10 +73,6 @@ export default {
         search: '',
         headers: [
             {
-                text: '#',
-                value: 'id',
-            },
-            {
                 text: 'rut',
                 value: 'rut',
             },
@@ -99,6 +95,10 @@ export default {
             {
                 text: 'Correo electrónico',
                 value: 'email',
+            },
+            {
+                text: 'Rol',
+                value: 'role.description',
             },
             {
                 text: 'Acciones',

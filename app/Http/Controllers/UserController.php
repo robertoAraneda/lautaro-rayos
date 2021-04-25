@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Helpers\Response;
 use App\Http\Repositories\UserRepository;
 use App\Http\Resources\Collection\UserCollection;
+use App\Http\Resources\Collection\RoleCollection;
 use App\Http\Resources\Object\UserObject;
+use App\Http\Resources\Object\RoleObject;
 
 class UserController extends Controller
 {
@@ -34,6 +36,20 @@ class UserController extends Controller
             }
 
             $collection = new UserCollection($this->userRepository->all());
+
+            return $this->response->ok($collection);
+        } catch (\Exception $exception) {
+            return $this->response->internalServerError($exception);
+        }
+    }
+    public function roles()
+    {
+        try {
+            if (!request()->isJson()) {
+                return $this->response->unauthorized();
+            }
+
+            $collection = new RoleCollection($this->userRepository->allRoles());
 
             return $this->response->ok($collection);
         } catch (\Exception $exception) {

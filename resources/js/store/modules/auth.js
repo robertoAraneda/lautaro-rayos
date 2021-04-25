@@ -113,6 +113,7 @@ export default {
                     rut: user.rut,
                     name: user.name,
                     password: user.password,
+                    role_id: 1,
                 });
 
                 const response = await fetch(`/api/auth/create-admin`, {
