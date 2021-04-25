@@ -96,12 +96,23 @@ export default {
         },
         logout: async ({ commit }) => {
             try {
-                const { data } = await axios.get(`${BASE_URL}/logout`);
+                const response = await fetch(`/api/auth/logout`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${localStorage.getItem(
+                            'access_token'
+                        )}`,
+                    },
+                });
+
+                const message = await response.json();
+                console.log(message);
 
                 commit('SET_LOGIN_USER', null);
                 commit('SET_ACCESS_TOKEN', null);
 
-                return { success: true, message: data.message };
+                return { success: true, message: message };
             } catch (error) {
                 console.log(error);
                 return { success: false };

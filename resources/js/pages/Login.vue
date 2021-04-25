@@ -5,7 +5,7 @@
                 <v-card max-width="400px" class="mx-auto mt-8">
                     <v-form ref="form">
                         <v-card-text
-                            class="headline d-flex justify-center blueS"
+                            class="headline d-flex justify-center burdeo"
                         >
                             <span class="white--text"> Iniciar sesión</span>
                         </v-card-text>
@@ -18,6 +18,7 @@
                                 @input="$v.rut.$touch()"
                                 @blur="$v.rut.$touch()"
                                 :error-messages="rutErrors"
+                                color="burdeo"
                             ></v-text-field>
                             <v-text-field
                                 v-model.trim="userEdited.password"
@@ -28,6 +29,7 @@
                                 @blur="$v.password.$touch()"
                                 @keypress.enter="submit"
                                 :error-messages="passwordErrors"
+                                color="burdeo"
                             ></v-text-field>
                         </v-card-text>
                         <v-card-actions>
@@ -35,14 +37,14 @@
                             <v-btn
                                 class="ma-2"
                                 :loading="isLogin"
-                                :disabled="isLogin"
-                                color="info"
+                                color="burdeo"
+                                dark
                                 @click="submit"
                             >
                                 Entrar
                                 <template v-slot:loader>
                                     <span class="custom-loader">
-                                        <v-icon light>mdi-cached</v-icon>
+                                        <v-icon dark light>mdi-cached</v-icon>
                                     </span>
                                 </template>
                             </v-btn>
@@ -83,6 +85,7 @@ export default {
         showConfirmPassword: false,
         dialog: true,
         bearerToken: '',
+        loadingButton: false,
     }),
     computed: {
         ...mapGetters({
@@ -129,7 +132,7 @@ export default {
                         const { success } = await this.attempt(token);
                         if (success) {
                             this.isLogin = false;
-                            this.$router.push({ name: 'laboratorio' });
+                            this.$router.push({ name: 'Laboratory' });
                         } else {
                             this.isLogin = false;
                         }

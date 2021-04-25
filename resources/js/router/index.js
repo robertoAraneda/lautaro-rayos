@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Login from '../pages/Login.vue';
 import FirstLogin from '../pages/FirstLogin.vue';
+import Landing from '../pages/Landing.vue';
 import Index from '../pages/laboratory/Index.vue';
 import { settings } from './settings';
 import { patient } from './patient';
@@ -9,6 +10,11 @@ import { patient } from './patient';
 Vue.use(VueRouter);
 
 const routes = [
+    {
+        path: '/',
+        name: 'Landing',
+        component: Landing,
+    },
     {
         path: '/login',
         name: 'Login',
