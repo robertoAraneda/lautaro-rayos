@@ -81,7 +81,7 @@ export default {
 
     methods: {
         test() {
-            this.$router.push({ name: 'login' });
+            this.$router.push({ name: 'Login' });
         },
         setDrawer() {
             this.drawer = !this.drawer;
