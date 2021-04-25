@@ -158,7 +158,7 @@ class AuthController extends Controller
     {
         $user = $request->user();
 
-        $searchUser = User::find($user->id);
+        $searchUser = User::find($user->id)->with('role');
 
         return response()->json([
       'user' => $searchUser], 200);

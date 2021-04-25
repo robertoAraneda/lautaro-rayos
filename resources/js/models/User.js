@@ -7,7 +7,8 @@ export default class User {
         motherLastname = '',
         phone = '',
         email = '',
-        password = ''
+        password = '',
+        role = null
     ) {
         this.id = id;
         this.rut = rut;
@@ -17,5 +18,6 @@ export default class User {
         this.motherLastname = motherLastname;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 }
