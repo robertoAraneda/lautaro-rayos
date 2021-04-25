@@ -1938,19 +1938,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           to: {
             name: 'FindPatient'
           },
-          icon: 'mdi-account-search'
+          icon: 'mdi-account-search',
+          permission: ['Administrador', 'Médico', 'Administrativo']
         }, {
           name: 'Crear paciente',
           to: {
             name: 'CreatePatient'
           },
-          icon: 'mdi-account-plus'
+          icon: 'mdi-account-plus',
+          permission: ['Administrador', 'Administrativo']
         }, {
           name: 'Adjuntar exámenes',
           to: {
             name: 'UploadTest'
           },
-          icon: 'mdi-account-plus'
+          icon: 'mdi-account-plus',
+          permission: ['Administrador', 'Administrativo']
         }]
       }, {
         name: 'Configuración',
@@ -1960,19 +1963,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           to: {
             name: 'SettingEmployee'
           },
-          icon: 'mdi-account-group'
+          icon: 'mdi-account-group',
+          permission: ['Administrador']
         }, {
           name: 'Tipo reporte',
           to: {
             name: 'SettingTypeReport'
           },
-          icon: 'mdi-file-document-multiple'
+          icon: 'mdi-file-document-multiple',
+          permission: ['Administrador']
         }, {
           name: 'Establecimiento',
           to: {
             name: 'SettingEstablishment'
           },
-          icon: 'mdi-hospital-building'
+          icon: 'mdi-hospital-building',
+          permission: ['Administrador']
         }]
       }],
       imageLab: _assets_fondo_blanco_png__WEBPACK_IMPORTED_MODULE_0__.default,
@@ -3612,6 +3618,7 @@ var User = function User() {
   var phone = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : '';
   var email = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : '';
   var password = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : '';
+  var role = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
 
   _classCallCheck(this, User);
 
@@ -3623,6 +3630,7 @@ var User = function User() {
   this.motherLastname = motherLastname;
   this.email = email;
   this.password = password;
+  this.role = role;
 };
 
 
@@ -3939,7 +3947,8 @@ var BASE_URL = '/api/auth';
   namespaced: true,
   state: {
     loginUser: null,
-    access_token: null
+    access_token: null,
+    role: null
   },
   mutations: {
     SET_LOGIN_USER: function SET_LOGIN_USER(state, user) {
@@ -3951,6 +3960,9 @@ var BASE_URL = '/api/auth';
     },
     SET_ACCESS_TOKEN: function SET_ACCESS_TOKEN(state, access_token) {
       state.access_token = access_token;
+    },
+    SET_ROLE: function SET_ROLE(state, payload) {
+      state.role = payload;
     }
   },
   getters: {
@@ -3962,6 +3974,9 @@ var BASE_URL = '/api/auth';
     },
     user: function user(state) {
       return state.loginUser;
+    },
+    role: function role(state) {
+      return state.role;
     }
   },
   actions: {
@@ -4066,23 +4081,25 @@ var BASE_URL = '/api/auth';
                 _yield$response$json2 = _context2.sent;
                 user = _yield$response$json2.user;
                 commit('SET_LOGIN_USER', user);
+                commit('SET_ROLE', user.role);
                 return _context2.abrupt("return", {
                   success: true
                 });
 
-              case 17:
-                _context2.prev = 17;
+              case 18:
+                _context2.prev = 18;
                 _context2.t0 = _context2["catch"](4);
                 console.log(_context2.t0);
                 commit('SET_ACCESS_TOKEN', null);
                 commit('SET_LOGIN_USER', null);
+                commit('SET_ROLE', null);
 
-              case 22:
+              case 24:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[4, 17]]);
+        }, _callee2, null, [[4, 18]]);
       }));
 
       function attempt(_x3, _x4) {

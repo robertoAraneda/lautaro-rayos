@@ -6,6 +6,7 @@ export default {
     state: {
         loginUser: null,
         access_token: null,
+        role: null,
     },
     mutations: {
         SET_LOGIN_USER: (state, user) => {
@@ -18,11 +19,15 @@ export default {
         SET_ACCESS_TOKEN: (state, access_token) => {
             state.access_token = access_token;
         },
+        SET_ROLE: (state, payload) => {
+            state.role = payload;
+        },
     },
     getters: {
         authenticated: state => state.loginUser && state.access_token,
         token: state => state.access_token,
         user: state => state.loginUser,
+        role: state => state.role,
     },
     actions: {
         login: async (_, credentials) => {
@@ -79,12 +84,14 @@ export default {
                 const { user } = await response.json();
 
                 commit('SET_LOGIN_USER', user);
+                commit('SET_ROLE', user.role);
                 return { success: true };
             } catch (error) {
                 console.log(error);
 
                 commit('SET_ACCESS_TOKEN', null);
                 commit('SET_LOGIN_USER', null);
+                commit('SET_ROLE', null);
             }
         },
         logout: async ({ commit }) => {
