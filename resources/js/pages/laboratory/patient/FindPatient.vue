@@ -109,13 +109,17 @@
 <script>
 import TableFoundedPatient from '@components/patient/TableFoundedPatient.vue';
 import Patient from '@models/Patient';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 
 export default {
     components: { TableFoundedPatient },
     data: () => ({
         editedItem: new Patient(),
     }),
+
+    mounted() {
+        this.SET_FOUNDED_PATIENTS([]);
+    },
     computed: {
         ...mapGetters({
             foundedPatients: 'patient/foundedPatients',
@@ -144,6 +148,9 @@ export default {
             findByDemographics: 'patient/fetchFoundedPatients',
             findByRut: 'patient/findPatientByRut',
             findByBdup: 'patient/findPatientByBdup',
+        }),
+        ...mapMutations({
+            SET_FOUNDED_PATIENTS: 'patient/SET_FOUNDED_PATIENTS',
         }),
         handleSearch() {
             if (this.rut) {

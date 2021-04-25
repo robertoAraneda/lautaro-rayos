@@ -1,27 +1,36 @@
 <template>
     <v-card>
         <v-card-text>
+            <span class="overline burdeo--text font-weight-bold"
+                >Subir reportes</span
+            >
             <v-row>
                 <v-col cols="5">
                     <date-picker-component @updateDate="date = $event" />
                 </v-col>
                 <v-col cols="7">
                     <v-row>
-                        <v-col cols="12" class="mt-n1">
-                            <p class="body-1 font-weight-bold">
-                                Fecha seleccionada:
-                                <span class="title">{{ dateReport }}</span>
-                            </p>
-                        </v-col>
-                        <v-col cols="12" class="mt-n6">
+                        <v-col cols="12">
                             <base-combobox
                                 @updateValue="selected = $event"
                                 label="Seleccione tipo de reporte:"
                                 :items="typeReports"
+                                prepend-inner-icon="mdi-filter"
+                            />
+                        </v-col>
+                        <v-col cols="12">
+                            <base-combobox
+                                class="mt-n6"
+                                @updateValue="selectedEstablishment = $event"
+                                label="Seleccione establecimiento:"
+                                :items="establishments"
+                                prepend-inner-icon="mdi-filter"
                             />
                         </v-col>
                         <v-col cols="12" class="mt-n6">
-                            <upload-file-component />
+                            <upload-file-component
+                                @files="$emit('files', $event)"
+                            />
                         </v-col>
                     </v-row>
                 </v-col>
@@ -40,23 +49,33 @@ export default {
     data: () => ({
         date: '',
         selected: null,
+        selectedEstablishment: null,
     }),
     created() {
         this.fetchTypeReports();
+        this.fetchEstablishments();
+    },
+    watch: {
+        selected() {
+            this.$emit('typeReport', this.selected);
+        },
+        selectedEstablishment() {
+            this.$emit('establishment', this.selectedEstablishment);
+        },
+        date() {
+            this.$emit('date', this.date);
+        },
     },
     computed: {
         ...mapGetters({
             typeReports: 'typeReport/typeReports',
+            establishments: 'establishment/establishments',
         }),
-        dateReport() {
-            if (this.date === '') return '';
-            let split = this.date.split('-');
-            return `${split[2]}-${split[1]}-${split[0]}`;
-        },
     },
     methods: {
         ...mapActions({
             fetchTypeReports: 'typeReport/fetchTypeReports',
+            fetchEstablishments: 'establishment/fetchEstablishments',
         }),
     },
 };

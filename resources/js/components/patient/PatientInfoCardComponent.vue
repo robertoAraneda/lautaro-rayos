@@ -1,5 +1,5 @@
 <template>
-    <v-card v-if="patient.names">
+    <v-card v-if="render">
         <v-card-text>
             <span class="overline burdeo--text font-weight-bold"
                 >Datos paciente</span
@@ -79,14 +79,13 @@
 <script>
 import { mapGetters } from 'vuex';
 export default {
+    props: {
+        render: Boolean,
+    },
     computed: {
         ...mapGetters({
-            foundedPatients: 'patient/foundedPatients',
+            patient: 'patient/foundedPatient',
         }),
-        patient() {
-            if (this.foundedPatients.length === 0) return {};
-            return this.foundedPatients[0];
-        },
     },
     methods: {},
 };

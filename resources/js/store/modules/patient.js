@@ -7,18 +7,23 @@ export default {
     state: {
         foundedPatients: [],
         patient: null,
+        foundedPatient: null,
     },
     mutations: {
         SET_FOUNDED_PATIENTS: (state, payload) => {
             state.foundedPatients = [];
             state.foundedPatients = payload;
         },
+        SET_FOUNDED_PATIENT: (state, payload) => {
+            state.foundedPatient = payload;
+        },
         SET_PATIENT: (state, payload) => {
-            state.typeReports.push(payload);
+            state.foundedPatients.push(payload);
         },
     },
     getters: {
         foundedPatients: state => state.foundedPatients,
+        foundedPatient: state => state.foundedPatient,
         patient: state => state.patient,
     },
     actions: {
@@ -60,6 +65,7 @@ export default {
                 const { success, data, message } = await response.json();
 
                 if (success) {
+                    commit('SET_FOUNDED_PATIENT', data.array[0]);
                     commit('SET_FOUNDED_PATIENTS', data.array);
                 } else {
                     console.log(error);
@@ -82,6 +88,7 @@ export default {
                 const { success, data, message } = await response.json();
 
                 if (success) {
+                    commit('SET_FOUNDED_PATIENT', data.array[0]);
                     commit('SET_FOUNDED_PATIENTS', data.array);
                 } else {
                     console.log(error);
@@ -112,6 +119,10 @@ export default {
                 });
 
                 const { success, data, message } = await response.json();
+
+                console.log(success);
+                console.log(data);
+                console.log(message);
                 if (success) {
                     commit('SET_PATIENT', data);
                     return { success, message };

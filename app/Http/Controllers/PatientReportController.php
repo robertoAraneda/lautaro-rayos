@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helpers\Response;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use App\Models\PatientReport;
 
 class PatientReportController extends Controller
 {
@@ -15,7 +17,22 @@ class PatientReportController extends Controller
     ) {
         $this->response = $response;
     }
-
+    /**
+     * Validate the description field.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     */
+    protected function validateData($request)
+    {
+        return Validator::make($request, [
+            'patient_id' => 'required',
+            'link_file' => 'required',
+            'name_file' => 'required',
+            'date_report' => 'required',
+            'type_report_id' => 'required|integer',
+            'establishment_id' => 'required|integer'
+         ]);
+    }
 
     /**
      * Display a listing of the resource.
@@ -35,7 +52,33 @@ class PatientReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            if (!request()->isJson()) {
+                return $this->response->unauthorized();
+            }
+
+            $validate = $this->validateData($request->all());
+
+            if ($validate->fails()) {
+                return $this->response->internalServerError($exception);
+            }
+
+            $patientReport = new PatientReport;
+
+            $patientReport->patient_id = $request->patient_id;
+            $patientReport->link_file = $request->link_file;
+            $patientReport->date_report = $request->date_report;
+            $patientReport->name_file = $request->name_file;
+            $patientReport->type_report_id = $request->type_report_id;
+            $patientReport->establishment_id = $request->establishment_id;
+            $patientReport->user_created_id = auth()->id();
+
+            $patientReport->save();
+
+            return $this->response->ok($patientReport->fresh());
+        } catch (\Exception $exception) {
+            return $this->response->exception($exception->getMessage());
+        }
     }
 
     /**
@@ -70,6 +113,21 @@ class PatientReportController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function findByPatient($patient_id)
+    {
+        $patientReport = PatientReport::where('patient_id', $patient_id)
+        ->with(['patient', 'typeReport', 'userCreated', 'establishment'])
+        ->get();
+
+        return $this->response->ok($patientReport);
+    }
+
+    public function downloadReportFile(Request $request)
+    {
+        //  return $request->all();
+        return Storage::download($request->name);
     }
 
     public function uploadFileReport(Request $request)

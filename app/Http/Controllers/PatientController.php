@@ -30,13 +30,10 @@ class PatientController extends Controller
     protected function validateData($request)
     {
         return Validator::make($request, [
-            'rut'               => 'required',
             'bdup'              => 'required',
             'names'             => 'required',
             'lastname'          => 'required',
             'mother_lastname'   => 'required',
-            'email'             => 'required',
-            'phone'             => 'required',
         ]);
     }
 
@@ -185,7 +182,7 @@ class PatientController extends Controller
             }
 
             $bdup       = $request->bdup;
-            $findModel  = $this->patientRepository->findByRut($bdup);
+            $findModel  = $this->patientRepository->findByBdup($bdup);
 
             if (!isset($findModel)) {
                 return $this->response->noContent();
