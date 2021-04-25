@@ -45,6 +45,23 @@ Route::group([
     Route::put('/type-reports/{id}', [App\Http\Controllers\TypeReportController::class, 'update']);
     Route::delete('/type-reports/{id}', [App\Http\Controllers\TypeReportController::class, 'destroy']);
 
+    //establecimientos
+    Route::post('/establishments', [App\Http\Controllers\EstablishmentController::class, 'store']);
+    Route::get('/establishments', [App\Http\Controllers\EstablishmentController::class, 'index']);
+    Route::put('/establishments/{id}', [App\Http\Controllers\EstablishmentController::class, 'update']);
+    Route::delete('/establishments/{id}', [App\Http\Controllers\EstablishmentController::class, 'destroy']);
+
+
+    //reports
+
+    Route::post('/reports', [App\Http\Controllers\PatientReportController::class, 'store']);
+    Route::get('/reports', [App\Http\Controllers\PatientReportController::class, 'index']);
+    Route::put('/reports/{id}', [App\Http\Controllers\PatientReportController::class, 'update']);
+    Route::post('/reports/download', [App\Http\Controllers\PatientReportController::class, 'downloadReportFile']);
+    Route::delete('/reports/{id}', [App\Http\Controllers\PatientReportController::class, 'destroy']);
+    Route::get('/reports/patient/{patient_id}', [App\Http\Controllers\PatientReportController::class, 'findByPatient']);
+
+
     //patient
     Route::post('/patients', [App\Http\Controllers\PatientController::class, 'store']);
     Route::put('/patients/{id}', [App\Http\Controllers\PatientController::class, 'update']);

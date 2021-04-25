@@ -1,11 +1,12 @@
 import headers from '../../services/fetch';
 
-const BASE_URL = '/api/v1/type-reports';
+const BASE_URL = '/api/v1/reports';
 
 export default {
     namespaced: true,
     state: {
         typeReports: [],
+        reportsPatient: [],
     },
     mutations: {
         SET_TYPE_REPORTS: (state, payload) => {
@@ -13,6 +14,9 @@ export default {
         },
         SET_TYPE_REPORT: (state, payload) => {
             state.typeReports.push(payload);
+        },
+        SET_REPORTS_PATIENT: (state, payload) => {
+            state.reportsPatient = payload;
         },
         DELETE_TYPE_REPORT: (state, payload) => {
             const index = state.typeReports.findIndex(
@@ -32,22 +36,9 @@ export default {
         typeReports: state => {
             return state.typeReports;
         },
+        reportsPatient: state => state.reportsPatient,
     },
     actions: {
-        deleteFileEmail: async (_, payload) => {
-            try {
-                const { data } = await axios.post(
-                    '/api/v1/report/delete',
-                    payload
-                );
-
-                const { _data } = data;
-
-                return _data;
-            } catch (error) {
-                console.log(error);
-            }
-        },
         uploadFileReport: async (_, payload) => {
             try {
                 let formData = new FormData();
@@ -64,11 +55,57 @@ export default {
                     body: formData,
                 });
 
-                const { success, data, message } = await response.json();
-                console.log(success);
-                console.log(message);
+                const { data } = await response.json();
 
                 return data;
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        deleteFileReport: async (_, payload) => {
+            try {
+                var raw = JSON.stringify({
+                    name: payload.name,
+                });
+
+                const response = await fetch(`${BASE_URL}/delete`, {
+                    method: 'POST',
+                    headers,
+                    body: raw,
+                });
+
+                const { success, message } = await response.json();
+
+                if (success) {
+                    return { success, message };
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        downloadFileReport: async (_, payload) => {
+            try {
+                var raw = JSON.stringify({
+                    name: payload.name_file,
+                });
+
+                const response = await fetch(`${BASE_URL}/download`, {
+                    method: 'POST',
+                    responseType: 'blob', // o blob o arraybuffer
+                    headers,
+                    body: raw,
+                });
+
+                console.log(response);
+
+                const blob = await response.blob();
+                return {
+                    blob: blob,
+                    filename: response.headers
+                        .get('content-disposition')
+                        .split('filename=')[1]
+                        .split('"')[1],
+                };
             } catch (error) {
                 console.log(error);
             }
@@ -93,10 +130,38 @@ export default {
                 console.log(error);
             }
         },
-        postTypeReport: async ({ commit }, payload) => {
+        findReportsByPatient: async ({ commit }, payload) => {
+            try {
+                const response = await fetch(
+                    `${BASE_URL}/patient/${payload.id}`,
+                    {
+                        method: 'GET',
+                        headers,
+                    }
+                );
+
+                const { success, data, message } = await response.json();
+
+                if (success) {
+                    commit('SET_REPORTS_PATIENT', data);
+                } else {
+                    console.log(error);
+                }
+
+                return { success, message };
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        postReport: async ({ commit }, payload) => {
             try {
                 var raw = JSON.stringify({
-                    description: payload.description,
+                    patient_id: payload.patient.id,
+                    link_file: payload.linkFile,
+                    name_file: payload.nameFile,
+                    date_report: payload.dateReport,
+                    type_report_id: payload.typeReport.id,
+                    establishment_id: payload.establishment.id,
                 });
 
                 const response = await fetch(BASE_URL, {

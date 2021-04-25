@@ -38,22 +38,38 @@
             </v-card-text>
             <v-card-actions class="d-flex">
                 <div class="ml-auto">
-                    <v-btn text color="secondary" dark @click="clearFields"
+                    <v-btn color="secondary" dark @click="clearFields"
                         >Limpiar</v-btn
                     >
-                    <v-btn text color="burdeo" dark @click="handleSearch"
+                    <v-btn
+                        :loading="loadingSearchButton"
+                        color="burdeo"
+                        dark
+                        @click="handleSearch"
                         >Buscar</v-btn
                     >
                 </div>
             </v-card-actions>
         </v-card>
         <v-card elevation="0" color="grey lighten-4" class="mt-3">
-            <v-row>
+            <v-row v-if="renderPatientInfoCard">
                 <v-col cols="4">
-                    <patient-info-card-component />
+                    <patient-info-card-component
+                        :render="renderPatientInfoCard"
+                    />
                 </v-col>
                 <v-col cols="8">
-                    <upload-report-component />
+                    <upload-report-component
+                        @typeReport="typeReport = $event"
+                        @establishment="establishment = $event"
+                        @files="files = $event"
+                        @date="date = $event"
+                    />
+                </v-col>
+                <v-col cols="12">
+                    <v-btn dark color="burdeo" block @click="save"
+                        >Guardar reporte del paciente
+                    </v-btn>
                 </v-col>
             </v-row>
         </v-card>
@@ -62,7 +78,7 @@
 <script>
 import TableFoundedPatient from '@components/patient/TableFoundedPatient.vue';
 import Patient from '@models/Patient';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import UploadReportComponent from '@components/patient/UploadReportComponent.vue';
 import PatientInfoCardComponent from '@components/patient/PatientInfoCardComponent.vue';
 
@@ -74,8 +90,19 @@ export default {
     },
     data: () => ({
         editedItem: new Patient(),
+        files: [],
+        typeReport: null,
+        establishment: null,
+        date: null,
+        renderPatientInfoCard: false,
+        loadingSearchButton: false,
     }),
+
     computed: {
+        ...mapGetters({
+            foundedPatients: 'patient/foundedPatients',
+            foundedPatient: 'patient/foundedPatient',
+        }),
         rut() {
             return this.editedItem.rut !== '';
         },
@@ -99,8 +126,25 @@ export default {
         ...mapActions({
             findByRut: 'patient/findPatientByRut',
             findByBdup: 'patient/findPatientByBdup',
+            storeReport: 'report/postReport',
         }),
+
+        save() {
+            this.files.forEach(file => {
+                this.storeReport({
+                    patient: this.foundedPatient,
+                    linkFile: file.url,
+                    nameFile: file.name,
+                    typeReport: this.typeReport,
+                    establishment: this.establishment,
+                    dateReport: this.date,
+                });
+            });
+
+            this.clearFields();
+        },
         handleSearch() {
+            this.loadingSearchButton = true;
             if (this.rut) {
                 this.prepareRut();
                 this.findByRut(this.editedItem);
@@ -108,6 +152,10 @@ export default {
                 this.prepareBdup();
                 this.findByBdup(this.editedItem);
             }
+            setTimeout(() => {
+                this.renderPatientInfoCard = true;
+                this.loadingSearchButton = false;
+            }, 1000);
         },
         prepareRut() {
             this.editedItem.bdup = '';
@@ -118,6 +166,7 @@ export default {
         clearFields() {
             this.editedItem.rut = '';
             this.editedItem.bdup = '';
+            this.renderPatientInfoCard = false;
         },
     },
 };

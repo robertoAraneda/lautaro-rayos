@@ -20,7 +20,7 @@ const routes = [
         component: FirstLogin,
     },
     {
-        path: '/laboratorio',
+        path: '/imagenologia',
         name: 'Laboratory',
         component: Index,
         meta: { requiresAuth: true },

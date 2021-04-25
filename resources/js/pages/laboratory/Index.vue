@@ -110,6 +110,11 @@ export default {
                         to: { name: 'SettingTypeReport' },
                         icon: 'mdi-file-document-multiple',
                     },
+                    {
+                        name: 'Establecimiento',
+                        to: { name: 'SettingEstablishment' },
+                        icon: 'mdi-hospital-building',
+                    },
                 ],
             },
         ],

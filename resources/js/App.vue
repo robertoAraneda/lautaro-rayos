@@ -24,7 +24,7 @@
                 color="burdeo"
                 dark
                 @click="laboratory"
-                >Laboratorio</v-btn
+                >Imagenología</v-btn
             >
             <v-btn class="ml-2" fab dark color="burdeo" small>
                 <v-icon dark>

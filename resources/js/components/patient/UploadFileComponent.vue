@@ -18,7 +18,7 @@
                 </template>
             </v-file-input>
             <v-btn block @click="handleUploadFile" color="burdeo" dark>
-                Subir
+                Subir archivo
             </v-btn>
         </v-col>
         <v-col cols="12">
@@ -66,6 +66,7 @@ export default {
     methods: {
         ...mapActions({
             uploadFileReport: 'report/uploadFileReport',
+            deleteFileReport: 'report/deleteFileReport',
         }),
         async handleUploadFile() {
             this.loadingFile = true;
@@ -78,6 +79,27 @@ export default {
             this.uploadedFiles.push(uploadedFile);
             this.file = null;
             this.loadingFile = false;
+            this.$emit('files', this.uploadedFiles);
+        },
+        async handleDeleteFile(file) {
+            const deleteFile = await this.deleteFileReport({ name: file.name });
+
+            /**
+      * Object = {
+      * name: "56653.jpg"
+      * size: 68379
+      + url: "/storage/56653.jpg"
+      * }
+      */
+
+            if (deleteFile) {
+                const editedIndex = this.uploadedFiles.findIndex(
+                    find => find.name === file.name
+                );
+                this.uploadedFiles.splice(editedIndex, 1);
+            } else {
+                console.log('error');
+            }
         },
     },
 };

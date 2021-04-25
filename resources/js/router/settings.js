@@ -1,6 +1,7 @@
 import SettingEmployee from '../pages/laboratory/settings/User.vue';
 import SettingIndex from '../pages/laboratory/settings/Index.vue';
 import SettingTypeReport from '../pages/laboratory/settings/TypeReport.vue';
+import SettingEstablishment from '../pages/laboratory/settings/Establishment.vue';
 
 export const settings = [
     {
@@ -19,6 +20,12 @@ export const settings = [
         path: 'configuracion/tipo-reporte',
         name: 'SettingTypeReport',
         component: SettingTypeReport,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: 'configuracion/establecimiento',
+        name: 'SettingEstablishment',
+        component: SettingEstablishment,
         meta: { requiresAuth: true },
     },
 ];

@@ -11,6 +11,7 @@
         item-text="description"
         item-value="id"
         return-object
+        v-bind="$attrs"
     >
         <template v-slot:selection="data">
             <v-chip
