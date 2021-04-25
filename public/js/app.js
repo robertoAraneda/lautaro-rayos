@@ -3677,7 +3677,7 @@ var routes = [{
   name: 'FirstLogin',
   component: _pages_FirstLogin_vue__WEBPACK_IMPORTED_MODULE_1__.default
 }, {
-  path: '/imagenologia',
+  path: '/modulo',
   name: 'Laboratory',
   component: _pages_laboratory_Index_vue__WEBPACK_IMPORTED_MODULE_2__.default,
   meta: {
