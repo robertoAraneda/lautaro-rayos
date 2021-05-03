@@ -1777,6 +1777,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -1792,7 +1797,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   data: function data() {
-    return {
+    return _defineProperty({
       userEdited: new _models_User__WEBPACK_IMPORTED_MODULE_1__.default(),
       userDefault: new _models_User__WEBPACK_IMPORTED_MODULE_1__.default(),
       snackbar: false,
@@ -1809,7 +1814,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dialog: true,
       bearerToken: '',
       loadingButton: false
-    };
+    }, "snackbar", {
+      model: false,
+      color: 'burdeo',
+      timeout: 3000,
+      message: ''
+    });
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)({
     authenticated: 'auth/authenticated',
@@ -1892,16 +1902,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                               name: 'Laboratory'
                             });
                           } else {
+                            _this.snackbarResponse(_success);
+
                             _this.isLogin = false;
                           }
 
-                          _context.next = 9;
+                          _context.next = 10;
                           break;
 
                         case 8:
+                          _this.snackbarResponse(success);
+
                           _this.isLogin = false;
 
-                        case 9:
+                        case 10:
                         case "end":
                           return _context.stop();
                       }
@@ -1916,6 +1930,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         }, _callee2);
       }))();
+    },
+    snackbarResponse: function snackbarResponse(status) {
+      if (status) {
+        this.snackbar = {
+          color: 'success',
+          message: 'Operación realizada con éxito.',
+          model: true
+        };
+      } else {
+        this.snackbar = {
+          color: 'error',
+          message: 'Ha ocurrido un error. No se ha podido iniciar sesión',
+          model: true
+        };
+      }
     },
     clear: function clear() {
       this.$v.$reset();
@@ -3556,6 +3585,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.dialog = true;
     },
     handleItem: function handleItem(dialog) {
+      console.log(this.editedItem);
+
       if (this.editedIndex === -1) {
         this.storeUser(this.editedItem);
       } else {
@@ -3738,6 +3769,7 @@ var Patient = function Patient() {
   var email = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : '';
   var phone = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : '';
   var age = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : '';
+  var password = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : '';
 
   _classCallCheck(this, Patient);
 
@@ -3751,6 +3783,7 @@ var Patient = function Patient() {
   this.email = email;
   this.phone = phone;
   this.age = age;
+  this.password = password;
 };
 
 
@@ -4190,12 +4223,13 @@ var BASE_URL = '/api/auth';
               case 13:
                 _context.prev = 13;
                 _context.t0 = _context["catch"](0);
+                console.log('error');
                 console.log(_context.t0);
                 return _context.abrupt("return", {
                   success: false
                 });
 
-              case 17:
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -4228,7 +4262,9 @@ var BASE_URL = '/api/auth';
                   break;
                 }
 
-                return _context2.abrupt("return");
+                return _context2.abrupt("return", {
+                  success: false
+                });
 
               case 4:
                 _context2.prev = 4;
@@ -4263,8 +4299,11 @@ var BASE_URL = '/api/auth';
                 commit('SET_ACCESS_TOKEN', null);
                 commit('SET_LOGIN_USER', null);
                 commit('SET_ROLE', null);
+                return _context2.abrupt("return", {
+                  success: false
+                });
 
-              case 24:
+              case 25:
               case "end":
                 return _context2.stop();
             }
@@ -6271,7 +6310,7 @@ var BASE_URL = '/api/v1/users';
                   lastname: user.lastname,
                   mother_lastname: user.motherLastname,
                   email: user.email,
-                  password: user.possword,
+                  password: user.password,
                   phone: user.phone,
                   role_id: user.role.id
                 });
@@ -6419,7 +6458,7 @@ var BASE_URL = '/api/v1/users';
                   lastname: user.lastname,
                   mother_lastname: user.motherLastname,
                   email: user.email,
-                  password: user.possword,
+                  password: user.password,
                   phone: user.phone,
                   role_id: user.role.id
                 });
@@ -36883,33 +36922,11 @@ var render = function() {
                                 color: "burdeo",
                                 dark: ""
                               },
-                              on: { click: _vm.submit },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "loader",
-                                  fn: function() {
-                                    return [
-                                      _c(
-                                        "span",
-                                        { staticClass: "custom-loader" },
-                                        [
-                                          _c(
-                                            "v-icon",
-                                            { attrs: { dark: "", light: "" } },
-                                            [_vm._v("mdi-cached")]
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ]
-                                  },
-                                  proxy: true
-                                }
-                              ])
+                              on: { click: _vm.submit }
                             },
                             [
                               _vm._v(
-                                "\n                            Entrar\n                            "
+                                "\n                            Entrar\n                        "
                               )
                             ]
                           )
@@ -36927,6 +36944,27 @@ var render = function() {
           )
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-snackbar",
+        {
+          attrs: {
+            timeout: _vm.snackbar.timeout,
+            color: _vm.snackbar.color,
+            absolute: "",
+            rounded: "pill",
+            bottom: ""
+          },
+          model: {
+            value: _vm.snackbar.model,
+            callback: function($$v) {
+              _vm.$set(_vm.snackbar, "model", $$v)
+            },
+            expression: "snackbar.model"
+          }
+        },
+        [_vm._v("\n        " + _vm._s(_vm.snackbar.message) + "\n    ")]
       )
     ],
     1

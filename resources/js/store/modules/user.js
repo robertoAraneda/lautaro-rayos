@@ -87,7 +87,7 @@ export default {
                     lastname: user.lastname,
                     mother_lastname: user.motherLastname,
                     email: user.email,
-                    password: user.possword,
+                    password: user.password,
                     phone: user.phone,
                     role_id: user.role.id,
                 });
@@ -145,7 +145,7 @@ export default {
                     lastname: user.lastname,
                     mother_lastname: user.motherLastname,
                     email: user.email,
-                    password: user.possword,
+                    password: user.password,
                     phone: user.phone,
                     role_id: user.role.id,
                 });

@@ -210,6 +210,7 @@ export default {
             this.dialog = true;
         },
         handleItem(dialog) {
+            console.log(this.editedItem);
             if (this.editedIndex === -1) {
                 this.storeUser(this.editedItem);
             } else {
