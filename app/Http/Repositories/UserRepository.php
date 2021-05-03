@@ -51,19 +51,19 @@ class UserRepository
     {
         $userModel =  new User;
 
-        $model->rut = strtoupper($request->rut);
-        $model->name =strtoupper($request->name);
-        $model->lastname= strtoupper($request->lastname);
-        $model->mother_lastname = strtoupper($request->mother_lastname);
-        $model->phone = strtoupper($request->phone);
-        $model->email = strtolower($request->email);
-        $model->password = bcrypt($request->password);
-        $model->role_id = $request->role_id;
+        $userModel->rut = strtoupper($request->rut);
+        $userModel->name =strtoupper($request->name);
+        $userModel->lastname= strtoupper($request->lastname);
+        $userModel->mother_lastname = strtoupper($request->mother_lastname);
+        $userModel->phone = strtoupper($request->phone);
+        $userModel->email = strtolower($request->email);
+        $userModel->password = bcrypt($request->password);
+        $userModel->role_id = $request->role_id;
 
 
-        $model->save();
+        $userModel->save();
 
-        return $model->fresh();
+        return $userModel->fresh();
     }
 
     public function storeAdmin($request)
