@@ -9,7 +9,8 @@ export default class Patient {
         birthDate = '',
         email = '',
         phone = '',
-        age = ''
+        age = '',
+        password = ''
     ) {
         this.id = id;
         this.rut = rut;
@@ -21,5 +22,6 @@ export default class Patient {
         this.email = email;
         this.phone = phone;
         this.age = age;
+        this.password = password;
     }
 }

@@ -42,17 +42,22 @@
                                 @click="submit"
                             >
                                 Entrar
-                                <template v-slot:loader>
-                                    <span class="custom-loader">
-                                        <v-icon dark light>mdi-cached</v-icon>
-                                    </span>
-                                </template>
                             </v-btn>
                         </v-card-actions>
                     </v-form>
                 </v-card>
             </v-col>
         </v-row>
+        <v-snackbar
+            :timeout="snackbar.timeout"
+            v-model="snackbar.model"
+            :color="snackbar.color"
+            absolute
+            rounded="pill"
+            bottom
+        >
+            {{ snackbar.message }}
+        </v-snackbar>
     </v-container>
 </template>
 <script>
@@ -86,6 +91,12 @@ export default {
         dialog: true,
         bearerToken: '',
         loadingButton: false,
+        snackbar: {
+            model: false,
+            color: 'burdeo',
+            timeout: 3000,
+            message: '',
+        },
     }),
     computed: {
         ...mapGetters({
@@ -134,15 +145,33 @@ export default {
                             this.isLogin = false;
                             this.$router.push({ name: 'Laboratory' });
                         } else {
+                            this.snackbarResponse(success);
                             this.isLogin = false;
                         }
                     } else {
+                        this.snackbarResponse(success);
                         this.isLogin = false;
                     }
                 }, 2000);
             }
         },
 
+        snackbarResponse(status) {
+            if (status) {
+                this.snackbar = {
+                    color: 'success',
+                    message: 'Operación realizada con éxito.',
+                    model: true,
+                };
+            } else {
+                this.snackbar = {
+                    color: 'error',
+                    message:
+                        'Ha ocurrido un error. No se ha podido iniciar sesión',
+                    model: true,
+                };
+            }
+        },
         clear() {
             this.$v.$reset();
             this.userEdited = Object.assign({}, this.userDefault);

@@ -53,6 +53,7 @@ export default {
 
                 return { success: true, token: access_token };
             } catch (error) {
+                console.log('error');
                 console.log(error);
                 return { success: false };
             }
@@ -63,7 +64,7 @@ export default {
             }
 
             if (!state.access_token) {
-                return;
+                return { success: false };
             }
 
             try {
@@ -92,6 +93,7 @@ export default {
                 commit('SET_ACCESS_TOKEN', null);
                 commit('SET_LOGIN_USER', null);
                 commit('SET_ROLE', null);
+                return { success: false };
             }
         },
         logout: async ({ commit }) => {
