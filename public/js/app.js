@@ -2373,6 +2373,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4009,12 +4010,15 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store */ "./resources/js/store/index.js");
+/* harmony import */ var _services_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/fetch */ "./resources/js/services/fetch.js");
+
 
 _store__WEBPACK_IMPORTED_MODULE_0__.default.subscribe(function (mutation) {
   switch (mutation.type) {
     case 'auth/SET_ACCESS_TOKEN':
       if (mutation.payload) {
         localStorage.setItem('access_token', mutation.payload);
+        _services_fetch__WEBPACK_IMPORTED_MODULE_1__.default.Authorization = "Bearer ".concat(localStorage.getItem('access_token'));
       } else {
         localStorage.removeItem('access_token');
       }
@@ -37239,9 +37243,9 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
-                                  label: "Nombres",
+                                  label: "Nombres*",
                                   required: "",
-                                  placeholder: "Nombres",
+                                  placeholder: "Nombres*",
                                   outlined: "",
                                   dense: "",
                                   color: "burdeo"
@@ -37264,9 +37268,9 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
-                                  label: "Apellido paterno",
+                                  label: "Apellido paterno*",
                                   required: "",
-                                  placeholder: "Apellido paterno",
+                                  placeholder: "Apellido paterno*",
                                   outlined: "",
                                   dense: "",
                                   color: "burdeo"
@@ -37519,7 +37523,9 @@ var render = function() {
                   )
                 ],
                 1
-              )
+              ),
+              _vm._v(" "),
+              _c("small", [_vm._v("*Campos obligatorios.")])
             ],
             1
           ),

@@ -30,10 +30,8 @@ class PatientController extends Controller
     protected function validateData($request)
     {
         return Validator::make($request, [
-            'bdup'              => 'required',
             'names'             => 'required',
             'lastname'          => 'required',
-            'mother_lastname'   => 'required',
         ]);
     }
 
