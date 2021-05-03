@@ -35,9 +35,9 @@
                             </v-col>
                             <v-col cols="6">
                                 <v-text-field
-                                    label="Nombres"
+                                    label="Nombres*"
                                     required
-                                    placeholder="Nombres"
+                                    placeholder="Nombres*"
                                     outlined
                                     dense
                                     color="burdeo"
@@ -47,9 +47,9 @@
                             </v-col>
                             <v-col cols="6">
                                 <v-text-field
-                                    label="Apellido paterno"
+                                    label="Apellido paterno*"
                                     required
-                                    placeholder="Apellido paterno"
+                                    placeholder="Apellido paterno*"
                                     outlined
                                     dense
                                     color="burdeo"
@@ -143,6 +143,7 @@
                         </v-row>
                     </v-col>
                 </v-row>
+                <small>*Campos obligatorios.</small>
             </v-card-text>
             <v-card-actions class="d-flex">
                 <div class="ml-auto">
