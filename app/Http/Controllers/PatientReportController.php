@@ -7,6 +7,7 @@ use App\Helpers\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\PatientReport;
+use Carbon\Carbon;
 
 class PatientReportController extends Controller
 {
@@ -133,8 +134,9 @@ class PatientReportController extends Controller
     public function uploadFileReport(Request $request)
     {
         try {
+            $originalName   =  $request->file->getClientOriginalName();
             $upload_path    = storage_path('app');
-            $name           = $request->file->getClientOriginalName();
+            $name           = Carbon::now()->format('YmdHis')."-".$originalName;
             $file           = $request->file->move($upload_path, $name);
             $url            = Storage::url($name);
             $size           = Storage::size($name);
